@@ -4,7 +4,18 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [],
+    "paths": {
+      "@features/*":["./src/features/*"],
+      "@modules/*":["./src/modules/*"],
+      "@guards/*":["./src/guards/*"],
+      "@pipes/*":["./src/pipes/*"],
+      "@models/*":["./src/models/*"],
+      "@interceptors/*":["./src/interceptors/*"],
+      "@resolvers/*":["./src/resolvers/*"],
+      "@directives/*":["./src/directives/*"],
+      "@services/*":["./src/services/*"],
+    }
   },
   "include": [
     "src/**/*.ts"
