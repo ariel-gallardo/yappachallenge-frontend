@@ -3,18 +3,14 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "./out-tsc/app",
+    "outDir": "./out-tsc",
     "types": [],
     "paths": {
-      "@features/*":["./src/features/*"],
-      "@modules/*":["./src/modules/*"],
+      "@api/*":["./src/api/*"],
+      "@cfg/*":["./src/environments/*"],
       "@guards/*":["./src/guards/*"],
-      "@pipes/*":["./src/pipes/*"],
+      "@features/*":["./src/features/*"],
       "@models/*":["./src/models/*"],
-      "@interceptors/*":["./src/interceptors/*"],
-      "@resolvers/*":["./src/resolvers/*"],
-      "@directives/*":["./src/directives/*"],
-      "@services/*":["./src/services/*"],
     }
   },
   "include": [

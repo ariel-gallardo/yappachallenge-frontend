@@ -3,43 +3,34 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "yappa-frontend": {
+    "impecable": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:class": {
-          "skipTests": true,
-          "path": "./src/models"
-        },
         "@schematics/angular:component": {
-          "skipTests": true,
+          "path": "/src/features",
           "standalone": false,
-          "path": "./src/features"
+          "skipTests": true
         },
         "@schematics/angular:directive": {
-          "skipTests": true,
+          "path": "/src/directives",
           "standalone": false,
-          "path": "./src/directives"
-        },
-        "@schematics/angular:guard": {
-          "skipTests": true,
-          "path": "./src/guards"
-        },
-        "@schematics/angular:interceptor": {
-          "skipTests": true,
-          "path": "./src/interceptors"
+          "skipTests": true
         },
         "@schematics/angular:pipe": {
-          "skipTests": true,
+          "path": "/src/pipes",
           "standalone": false,
-          "path": "./src/pipes"
+          "skipTests": true
         },
-        "@schematics/angular:resolver": {
-          "skipTests": true,
-          "path": "./src/resolvers"
+        "@schematics/angular:guard": {
+          "path": "/src/guards",
+          "skipTests": true
+        },
+        "@schematics/angular:module": {
+          "path": "/src/features"
         },
         "@schematics/angular:service": {
-          "skipTests": true,
-          "path": "./src/services"
+          "path": "/src/features",
+          "skipTests": true
         }
       },
       "root": "",
@@ -61,7 +52,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/@angular/material/prebuilt-themes/azure-blue.css"
             ]
           },
           "configurations": {
@@ -92,10 +84,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "yappa-frontend:build:production"
+              "buildTarget": "impecable:build:production"
             },
             "development": {
-              "buildTarget": "yappa-frontend:build:development"
+              "buildTarget": "impecable:build:development"
             }
           },
           "defaultConfiguration": "development"
