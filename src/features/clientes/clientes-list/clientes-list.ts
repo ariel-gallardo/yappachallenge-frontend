@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { PageEvent } from '@angular/material/paginator';
 import { Client } from '@api/client/models/client.model';
 import { Pagination } from '@api/client/models/common/pagination.model';
@@ -14,9 +15,6 @@ import { debounceTime, Subject, Subscription } from 'rxjs';
   styleUrl: './clientes-list.css',
 })
 export class ClientesList implements OnInit, OnDestroy, AfterViewInit {
-
-
-
 
   private subs: Subscription;
   private clientes: Client[] = [];
@@ -52,18 +50,30 @@ export class ClientesList implements OnInit, OnDestroy, AfterViewInit {
       this.clientesFacade.clientClientesFiltersGet(this.filters);
     }))
     this.subs.add(this.inputSubject
-      .pipe(debounceTime(300)) // ⏳ 300 ms
+      .pipe(debounceTime(300))
       .subscribe(({ field, value }) => {
         this.searchByFilter(field, value);
       }));
   }
 
-  onChangeInput(event: Event, field: string) {
-    const target = event.target as HTMLInputElement;
-    const value = target.value;
+onChangeInput(event: Event | MatDatepickerInputEvent<Date>, field: string) {
+  let value: any;
 
-    this.inputSubject.next({ field, value });
+  if ('value' in event) {
+    value = event.value;
+    if(value != null){
+      const dia = value.getDate().toString().padStart(2, '0');
+      const mes = (value.getMonth() + 1).toString().padStart(2, '0');
+      const anio = value.getFullYear();
+      value = `${dia}/${mes}/${anio}`;
+    }
+  } else {
+    value = (event.target as HTMLInputElement).value;
   }
+
+  this.inputSubject.next({ field, value });
+}
+
 
 searchByFilter(field: string, value: string) {
   this.filters = {

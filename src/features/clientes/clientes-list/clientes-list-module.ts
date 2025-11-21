@@ -8,8 +8,13 @@ import { ClientesList } from './clientes-list';
 import { RouterModule } from '@angular/router';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 @NgModule({
+  providers: [provideNativeDateAdapter()],
   declarations: [ClientesList],
   imports: [
     CommonModule,
@@ -19,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatFormFieldModule, MatInputModule, MatDatepickerModule,
     RouterModule.forChild([
       {component: ClientesList, path: ''}
     ])

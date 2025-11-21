@@ -1,46 +1,50 @@
 <div class="grid grid-rows-[1fr_auto] h-[90vh] gap-2">
   <div>
-<form class="grid grid-cols-7 gap-4 mx-2" [formGroup]="form">
-  <mat-form-field appearance="outline">
-    <input matInput formControlName="nombre" placeholder="Nombre"
-           (keyup)="onChangeInput($event, 'nombre')">
-  </mat-form-field>
+    <form class="grid grid-cols-7 gap-4 mx-2" [formGroup]="form">
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="nombre" placeholder="Nombre" (keyup)="onChangeInput($event, 'nombre')">
+      </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <input matInput formControlName="apellido" placeholder="Apellido"
-           (keyup)="onChangeInput($event, 'apellido')">
-  </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="apellido" placeholder="Apellido" (keyup)="onChangeInput($event, 'apellido')">
+      </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <input matInput formControlName="razonSocial" placeholder="Razon Social"
-           (keyup)="onChangeInput($event, 'razonSocial')">
-  </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="razonSocial" placeholder="Razon Social"
+          (keyup)="onChangeInput($event, 'razonSocial')">
+      </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <input matInput formControlName="cuit" placeholder="Cuit 20-12345678-3"
-           (keyup)="onChangeInput($event, 'cuit')">
-  </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="cuit" mask="00-00000000-0" placeholder="XX-XXXXXXXX-X"
+          (keyup)="onChangeInput($event, 'cuit')">
+      </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <input matInput type="date" formControlName="fechaNacimientoMin"
-           (keyup)="onChangeInput($event, 'fechaNacimientoMin')">
-  </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput [matDatepicker]="fechaMin" formControlName="fechaNacimientoMin"
+          (dateChange)="onChangeInput($event, 'fechaNacimientoMin')">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="fechaMin"></mat-datepicker-toggle>
+        <mat-datepicker #fechaMin></mat-datepicker>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-    <input matInput type="date" formControlName="fechaNacimientoMax"
-           (keyup)="onChangeInput($event, 'fechaNacimientoMax')">
-  </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput [matDatepicker]="fechaMax" formControlName="fechaNacimientoMax"
+          (dateChange)="onChangeInput($event, 'fechaNacimientoMax')">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="fechaMax"></mat-datepicker-toggle>
+        <mat-datepicker #fechaMax></mat-datepicker>
+      </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <input matInput formControlName="telefonoCelular" placeholder="Telefono"
-           (keyup)="onChangeInput($event, 'telefonoCelular')">
-  </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="telefonoCelular" placeholder="Telefono"
+          (keyup)="onChangeInput($event, 'telefonoCelular')">
+      </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <input type="email" matInput formControlName="email" placeholder="Email"
-           (keyup)="onChangeInput($event, 'email')">
-  </mat-form-field>
-</form>
+      <mat-form-field appearance="outline">
+        <input type="email" matInput formControlName="email" placeholder="Email"
+          (keyup)="onChangeInput($event, 'email')">
+      </mat-form-field>
+    </form>
 
     <table mat-table [dataSource]="pagination.items">
 
