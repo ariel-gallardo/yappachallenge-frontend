@@ -33,6 +33,7 @@ export class ClientesEffects {
         ofType(ClientesActions.clientClientesDeleteExecute),
         switchMap(params =>
             this.api.clientClientesDelete(params, 'response').pipe(
+                //@ts-ignore
                 
                 map(() => ClientesActions.clientClientesDeleteSuccess()),
                 catchError(errors => of(ClientesActions.clientClientesDeleteSetError({errors})))
@@ -43,6 +44,7 @@ export class ClientesEffects {
         ofType(ClientesActions.clientClientesFiltersFirstGetExecute),
         switchMap(params =>
             this.api.clientClientesFiltersFirstGet(params, 'response').pipe(
+                //@ts-ignore
                 map(response => ClientesActions.clientClientesFiltersFirstGetSetData({data: response.body!.data  })),
                 
                 catchError(errors => of(ClientesActions.clientClientesFiltersFirstGetSetError({errors})))
@@ -64,6 +66,7 @@ export class ClientesEffects {
         ofType(ClientesActions.clientClientesGetExecute),
         switchMap(params =>
             this.api.clientClientesGet(params, 'response').pipe(
+                //@ts-ignore
                 map(response => ClientesActions.clientClientesGetSetData({data: response.body!.data  })),
                 
                 catchError(errors => of(ClientesActions.clientClientesGetSetError({errors})))
@@ -85,6 +88,7 @@ export class ClientesEffects {
         ofType(ClientesActions.clientClientesPostExecute),
         switchMap(params =>
             this.api.clientClientesPost(params, 'response').pipe(
+                //@ts-ignore
                 map(response => ClientesActions.clientClientesPostSetData({data: response.body!.data  })),
                 
                 catchError(errors => of(ClientesActions.clientClientesPostSetError({errors})))
@@ -95,6 +99,7 @@ export class ClientesEffects {
         ofType(ClientesActions.clientClientesPutExecute),
         switchMap(params =>
             this.api.clientClientesPut(params, 'response').pipe(
+                //@ts-ignore
                 map(response => ClientesActions.clientClientesPutSetData({data: response.body!.data  })),
                 
                 catchError(errors => of(ClientesActions.clientClientesPutSetError({errors})))
@@ -105,6 +110,7 @@ export class ClientesEffects {
         ofType(ClientesActions.clientClientesRangeDeleteExecute),
         switchMap(params =>
             this.api.clientClientesRangeDelete(params, 'response').pipe(
+                //@ts-ignore
                 
                 map(() => ClientesActions.clientClientesRangeDeleteSuccess()),
                 catchError(errors => of(ClientesActions.clientClientesRangeDeleteSetError({errors})))
@@ -127,7 +133,7 @@ export class ClientesEffects {
         switchMap(params =>
             this.api.clientClientesRangePut(params, 'response').pipe(
                 //@ts-ignore
-                map(response => ClientesActions.clientClientesRangePutSetData({data: {items: (response.body!.data), currentPage: Number(response.headers.get('X-Current-Page')),totalPages: Number(response.headers.get('X-Total-Pages')),pageSize: Number(response.headers.get('X-Page-Size')),totalCount: Number(response.headers.get('X-Total-Count'))}  })),
+                map(response => ClientesActions.clientClientesRangePutSetData({data: {items: response.body!.data, currentPage: Number(response.headers.get('X-Current-Page')),totalPages: Number(response.headers.get('X-Total-Pages')),pageSize: Number(response.headers.get('X-Page-Size')),totalCount: Number(response.headers.get('X-Total-Count'))}  })),
                 
                 catchError(errors => of(ClientesActions.clientClientesRangePutSetError({errors})))
         )))

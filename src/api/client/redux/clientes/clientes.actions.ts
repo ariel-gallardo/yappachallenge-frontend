@@ -26,9 +26,11 @@ export class ClientesActions {
     '[Clientes] clientClientesDelete Execute',
     props<clientClientesDeleteRequest>()
   );
+
   static clientClientesDeleteSuccess = createAction(
     '[Clientes] clientClientesDelete Success',
   );
+
   static clientClientesDeleteSetError = createAction(
   '[Clientes] clientClientesDelete SetError',
       props<{errors: ValidationError[]}>()
@@ -43,6 +45,11 @@ export class ClientesActions {
     '[Clientes] clientClientesFiltersFirstGet SetData',
     props<{data: Client }>()
   );
+
+  static clientClientesFiltersFirstGetSuccess = createAction(
+    '[Clientes] clientClientesFiltersFirstGet Success',
+  );
+
   static clientClientesFiltersFirstGetSetError = createAction(
   '[Clientes] clientClientesFiltersFirstGet SetError',
       props<{errors: ValidationError[]}>()
@@ -57,6 +64,11 @@ export class ClientesActions {
     '[Clientes] clientClientesFiltersGet SetData',
     props<{data: Pagination<Client> }>()
   );
+
+  static clientClientesFiltersGetSuccess = createAction(
+    '[Clientes] clientClientesFiltersGet Success',
+  );
+
   static clientClientesFiltersGetSetError = createAction(
   '[Clientes] clientClientesFiltersGet SetError',
       props<{errors: ValidationError[]}>()
@@ -71,6 +83,11 @@ export class ClientesActions {
     '[Clientes] clientClientesGet SetData',
     props<{data: Client }>()
   );
+
+  static clientClientesGetSuccess = createAction(
+    '[Clientes] clientClientesGet Success',
+  );
+
   static clientClientesGetSetError = createAction(
   '[Clientes] clientClientesGet SetError',
       props<{errors: ValidationError[]}>()
@@ -85,6 +102,11 @@ export class ClientesActions {
     '[Clientes] clientClientesIdsGet SetData',
     props<{data: Pagination<Client> }>()
   );
+
+  static clientClientesIdsGetSuccess = createAction(
+    '[Clientes] clientClientesIdsGet Success',
+  );
+
   static clientClientesIdsGetSetError = createAction(
   '[Clientes] clientClientesIdsGet SetError',
       props<{errors: ValidationError[]}>()
@@ -99,6 +121,11 @@ export class ClientesActions {
     '[Clientes] clientClientesPost SetData',
     props<{data: Client }>()
   );
+
+  static clientClientesPostSuccess = createAction(
+    '[Clientes] clientClientesPost Success',
+  );
+
   static clientClientesPostSetError = createAction(
   '[Clientes] clientClientesPost SetError',
       props<{errors: ValidationError[]}>()
@@ -113,6 +140,11 @@ export class ClientesActions {
     '[Clientes] clientClientesPut SetData',
     props<{data: Client }>()
   );
+
+  static clientClientesPutSuccess = createAction(
+    '[Clientes] clientClientesPut Success',
+  );
+
   static clientClientesPutSetError = createAction(
   '[Clientes] clientClientesPut SetError',
       props<{errors: ValidationError[]}>()
@@ -123,9 +155,11 @@ export class ClientesActions {
     '[Clientes] clientClientesRangeDelete Execute',
     props<clientClientesRangeDeleteRequest>()
   );
+
   static clientClientesRangeDeleteSuccess = createAction(
     '[Clientes] clientClientesRangeDelete Success',
   );
+
   static clientClientesRangeDeleteSetError = createAction(
   '[Clientes] clientClientesRangeDelete SetError',
       props<{errors: ValidationError[]}>()
@@ -140,6 +174,11 @@ export class ClientesActions {
     '[Clientes] clientClientesRangePost SetData',
     props<{data: Pagination<Client> }>()
   );
+
+  static clientClientesRangePostSuccess = createAction(
+    '[Clientes] clientClientesRangePost Success',
+  );
+
   static clientClientesRangePostSetError = createAction(
   '[Clientes] clientClientesRangePost SetError',
       props<{errors: ValidationError[]}>()
@@ -154,6 +193,11 @@ export class ClientesActions {
     '[Clientes] clientClientesRangePut SetData',
     props<{data: Pagination<Client> }>()
   );
+
+  static clientClientesRangePutSuccess = createAction(
+    '[Clientes] clientClientesRangePut Success',
+  );
+
   static clientClientesRangePutSetError = createAction(
   '[Clientes] clientClientesRangePut SetError',
       props<{errors: ValidationError[]}>()

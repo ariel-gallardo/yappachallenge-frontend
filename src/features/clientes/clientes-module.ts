@@ -1,18 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { List } from './list/list';
-import {MatTableModule} from '@angular/material/table';
 import { ClientesReduxModule } from '@api/client/redux/clientes/clientes.module';
 import { RouterModule } from '@angular/router';
 import Routes from './routes';
+import { ClientShell } from './client-shell/client-shell';
 
 @NgModule({
   declarations: [
-    List
+    ClientShell
   ],
   imports: [
     CommonModule,
-    MatTableModule,
     ClientesReduxModule,
     RouterModule.forChild(Routes)
   ]

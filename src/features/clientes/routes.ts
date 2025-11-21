@@ -1,8 +1,10 @@
 import { Routes } from "@angular/router";
-import { List } from "./list/list";
+import { ClientShell } from "./client-shell/client-shell";
 
 const routes: Routes = [
-    {path: 'lista', component: List}
+    {path: '', component: ClientShell, children:[
+        {path: 'lista' , loadChildren: () => import('@features/clientes/clientes-list/clientes-list-module').then(m => m.ClientesListModule)}
+    ]},
 ];
 
 export default routes;
