@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Client } from '@api/client/models/client.model';
 import { Pagination } from '@api/client/models/common/pagination.model';
 import { ClientesFacade } from '@api/client/redux/clientes/clientes.facade';
 import { clientClientesFiltersGetRequest } from '@api/client/services/clientes.service';
-import { Subscription } from 'rxjs';
+import { debounceTime, Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'clientes-list',
@@ -14,12 +15,28 @@ import { Subscription } from 'rxjs';
 })
 export class ClientesList implements OnInit, OnDestroy, AfterViewInit {
 
+
+
+
   private subs: Subscription;
   private clientes: Client[] = [];
   private filters: clientClientesFiltersGetRequest;
   public pagination: Pagination<Client>
+  form: any;
+  private inputSubject = new Subject<{ field: string; value: any }>();
 
-  constructor(private clientesFacade: ClientesFacade) {
+
+  constructor(private clientesFacade: ClientesFacade, private fb: FormBuilder) {
+    this.form = this.fb.group({
+      nombre: ['', []],
+      apellido: ['', []],
+      razonSocial: ['', []],
+      cuit: ['', []],
+      fechaNacimientoMin: ['',],
+      fechaNacimientoMax: ['',],
+      telefonoCelular: ['', []],
+      email: ['', []]
+    });
     this.pagination = {
       items: [],
       currentPage: 0,
@@ -34,8 +51,28 @@ export class ClientesList implements OnInit, OnDestroy, AfterViewInit {
     this.subs.add(this.clientesFacade.clientClientesDeleteIsLoaded$.subscribe(x => {
       this.clientesFacade.clientClientesFiltersGet(this.filters);
     }))
+    this.subs.add(this.inputSubject
+      .pipe(debounceTime(300)) // ⏳ 300 ms
+      .subscribe(({ field, value }) => {
+        this.searchByFilter(field, value);
+      }));
   }
-  
+
+  onChangeInput(event: Event, field: string) {
+    const target = event.target as HTMLInputElement;
+    const value = target.value;
+
+    this.inputSubject.next({ field, value });
+  }
+
+searchByFilter(field: string, value: string) {
+  this.filters = {
+    ...this.filters,
+    [field]: value
+  };
+  this.clientesFacade.clientClientesFiltersGet(this.filters);
+}
+
 
   ngAfterViewInit(): void {
     this.clientesFacade.clientClientesFiltersGet(this.filters);
@@ -64,19 +101,19 @@ export class ClientesList implements OnInit, OnDestroy, AfterViewInit {
     return this.clientes;
   }
 
-  public editar(entityId:number){
+  public editar(entityId: number) {
 
   }
 
-  public eliminar(entityId:number){
-    this.clientesFacade.clientClientesDelete({entityId});
+  public eliminar(entityId: number) {
+    this.clientesFacade.clientClientesDelete({ entityId });
   }
 
-onPageChange(e: PageEvent) {
-  this.filters.page = e.pageIndex + 1;
-  this.filters.pageSize = e.pageSize;
-  this.clientesFacade.clientClientesFiltersGet(this.filters);
-}
+  onPageChange(e: PageEvent) {
+    this.filters.page = e.pageIndex + 1;
+    this.filters.pageSize = e.pageSize;
+    this.clientesFacade.clientClientesFiltersGet(this.filters);
+  }
 
 
 }

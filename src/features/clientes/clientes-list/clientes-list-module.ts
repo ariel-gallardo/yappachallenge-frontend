@@ -6,7 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ClientesList } from './clientes-list';
 import { RouterModule } from '@angular/router';
-
+import {MatInputModule} from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ClientesList],
@@ -16,6 +17,8 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     MatPaginatorModule,
+    MatInputModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {component: ClientesList, path: ''}
     ])

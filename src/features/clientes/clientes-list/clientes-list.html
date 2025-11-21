@@ -1,62 +1,105 @@
 <div class="grid grid-rows-[1fr_auto] h-[90vh] gap-2">
-  <table mat-table [dataSource]="pagination.items">
+  <div>
+<form class="grid grid-cols-7 gap-4 mx-2" [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <input matInput formControlName="nombre" placeholder="Nombre"
+           (keyup)="onChangeInput($event, 'nombre')">
+  </mat-form-field>
 
-    <ng-container matColumnDef="nombre">
-      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.nombre}} </mat-cell>
-    </ng-container>
+  <mat-form-field appearance="outline">
+    <input matInput formControlName="apellido" placeholder="Apellido"
+           (keyup)="onChangeInput($event, 'apellido')">
+  </mat-form-field>
 
-    <ng-container matColumnDef="apellido">
-      <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.apellido}} </mat-cell>
-    </ng-container>
+  <mat-form-field appearance="outline">
+    <input matInput formControlName="razonSocial" placeholder="Razon Social"
+           (keyup)="onChangeInput($event, 'razonSocial')">
+  </mat-form-field>
 
-    <ng-container matColumnDef="razonSocial">
-      <mat-header-cell *matHeaderCellDef> Razon Social </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.razonSocial}} </mat-cell>
-    </ng-container>
+  <mat-form-field appearance="outline">
+    <input matInput formControlName="cuit" placeholder="Cuit 20-12345678-3"
+           (keyup)="onChangeInput($event, 'cuit')">
+  </mat-form-field>
 
-    <ng-container matColumnDef="cuit">
-      <mat-header-cell *matHeaderCellDef> Cuit </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.cuit}} </mat-cell>
-    </ng-container>
+  <mat-form-field appearance="outline">
+    <input matInput type="date" formControlName="fechaNacimientoMin"
+           (keyup)="onChangeInput($event, 'fechaNacimientoMin')">
+  </mat-form-field>
 
-    <ng-container matColumnDef="fechaNacimiento">
-      <mat-header-cell *matHeaderCellDef> Fecha de Nacimiento </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.fechaNacimiento}} </mat-cell>
-    </ng-container>
+    <mat-form-field appearance="outline">
+    <input matInput type="date" formControlName="fechaNacimientoMax"
+           (keyup)="onChangeInput($event, 'fechaNacimientoMax')">
+  </mat-form-field>
 
-    <ng-container matColumnDef="telefonoCelular">
-      <mat-header-cell *matHeaderCellDef> Telefono Celular </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.telefonoCelular}} </mat-cell>
-    </ng-container>
+  <mat-form-field appearance="outline">
+    <input matInput formControlName="telefonoCelular" placeholder="Telefono"
+           (keyup)="onChangeInput($event, 'telefonoCelular')">
+  </mat-form-field>
 
-    <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
-    </ng-container>
+  <mat-form-field appearance="outline">
+    <input type="email" matInput formControlName="email" placeholder="Email"
+           (keyup)="onChangeInput($event, 'email')">
+  </mat-form-field>
+</form>
 
-    <ng-container matColumnDef="acciones">
-      <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-        <button mat-icon-button color="primary" (click)="editar(row.id)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="eliminar(row.id)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </table>
+    <table mat-table [dataSource]="pagination.items">
+
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.nombre}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="apellido">
+        <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.apellido}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="razonSocial">
+        <mat-header-cell *matHeaderCellDef> Razon Social </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.razonSocial}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cuit">
+        <mat-header-cell *matHeaderCellDef> Cuit </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.cuit}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="fechaNacimiento">
+        <mat-header-cell *matHeaderCellDef> Fecha de Nacimiento </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.fechaNacimiento}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="telefonoCelular">
+        <mat-header-cell *matHeaderCellDef> Telefono Celular </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.telefonoCelular}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary" (click)="editar(row.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminar(row.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+
+
+  </div>
+
   <div class="flex justify-center">
-  <mat-paginator
-    [length]="pagination.totalCount"
-    [pageIndex]="pagination.currentPage - 1"
-    [pageSize]="pagination.pageSize"
-    [pageSizeOptions]="[5, 10, 25, 100]"
-    (page)="onPageChange($event)">
-  </mat-paginator>
+    <mat-paginator [length]="pagination.totalCount" [pageIndex]="pagination.currentPage - 1"
+      [pageSize]="pagination.pageSize" [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPageChange($event)">
+    </mat-paginator>
   </div>
 </div>

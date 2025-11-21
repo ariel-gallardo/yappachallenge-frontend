@@ -4,10 +4,12 @@ import { ClientesReduxModule } from '@api/client/redux/clientes/clientes.module'
 import { RouterModule } from '@angular/router';
 import Routes from './routes';
 import { ClientShell } from './client-shell/client-shell';
+import { ClientesEdit } from './clientes-edit/clientes-edit';
 
 @NgModule({
   declarations: [
-    ClientShell
+    ClientShell,
+    ClientesEdit
   ],
   imports: [
     CommonModule,
