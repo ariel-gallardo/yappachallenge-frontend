@@ -17,7 +17,7 @@
           "skipTests": true
         },
         "@schematics/angular:pipe": {
-          "path": "/src/pipes",
+          "path": "/src/features/shared/pipes",
           "standalone": false,
           "skipTests": true
         },

@@ -59,7 +59,7 @@
 
       <ng-container matColumnDef="telefonoCelular">
         <mat-header-cell *matHeaderCellDef> Telefono Celular </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.telefonoCelular}} </mat-cell>
+        <mat-cell *matCellDef="let row"> {{row.telefonoCelular | telefono}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="email">
