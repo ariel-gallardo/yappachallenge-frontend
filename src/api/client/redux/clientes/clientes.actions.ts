@@ -1,205 +1,233 @@
 import {createAction, props} from '@ngrx/store';
 import {Pagination} from '../../models/common/pagination.model';
 import {Response} from '../../models/common/response.model'; 
-
-import { clientClientesDeleteRequest } from '@api/client/services/clientes.service'; 
-import { clientClientesFiltersFirstGetRequest } from '@api/client/services/clientes.service'; 
-import { clientClientesFiltersGetRequest } from '@api/client/services/clientes.service'; 
-import { clientClientesGetRequest } from '@api/client/services/clientes.service'; 
-import { clientClientesIdsGetRequest } from '@api/client/services/clientes.service'; 
-import { clientClientesPostRequest } from '@api/client/services/clientes.service'; 
-import { clientClientesPutRequest } from '@api/client/services/clientes.service'; 
-import { clientClientesRangeDeleteRequest } from '@api/client/services/clientes.service'; 
-import { clientClientesRangePostRequest } from '@api/client/services/clientes.service'; 
-import { clientClientesRangePutRequest } from '@api/client/services/clientes.service'; 
-
+import {NullableFormControl} from '../../models/common/nullable-form-control.model';
+import { FormGroup } from '@angular/forms';
 import { BaseResponse } from '@api/client/models/base-response.model';
 import { Client } from '@api/client/models/client.model';
+import { Client2 } from '@api/client/models/client2.model';
 import { ValidationError } from '@api/client/models/validation-error.model';
+import { DeleteRequest } from '@api/client/services/clientes.service'; 
+import { FiltersFirstGetRequest } from '@api/client/services/clientes.service'; 
+import { FiltersGetRequest } from '@api/client/services/clientes.service'; 
+import { GetRequest } from '@api/client/services/clientes.service'; 
+import { IdsGetRequest } from '@api/client/services/clientes.service'; 
+import { PostRequest } from '@api/client/services/clientes.service'; 
+import { PutRequest } from '@api/client/services/clientes.service'; 
+import { RangeDeleteRequest } from '@api/client/services/clientes.service'; 
+import { RangePostRequest } from '@api/client/services/clientes.service'; 
+import { RangePutRequest } from '@api/client/services/clientes.service'; 
+import { PageEvent } from '@angular/material/paginator';
 
 export class ClientesActions {
 
   static Init = createAction('[Clientes] Init');
 
-  static clientClientesDeleteInit = createAction('[Clientes] clientClientesDeleteInit');
-  static clientClientesDeleteExecute = createAction(
-    '[Clientes] clientClientesDelete Execute',
-    props<clientClientesDeleteRequest>()
+  static DeleteInit = createAction('[Clientes] DeleteInit');
+  static DeleteDataInit = createAction('[Clientes] DeleteDataInit');
+  static DeleteExecute = createAction(
+    '[Clientes] Delete Execute'
+  );
+  
+  static DeleteRequestUpdate = createAction('[Clientes] Delete RequestUpdate', props<{ request: DeleteRequest }>());
+  static DeleteRequestUpdateOne = createAction('[Clientes] Delete RequestUpdateOne', props<{ request: DeleteRequest }>());
+  static DeleteRequestUpdateOneSuccess = createAction('[Clientes] Delete RequestUpdateOneSuccess', props<{key:string,value:any}>());
+  static DeleteRequestUpdateSuccess = createAction('[Clientes] Delete RequestUpdateSuccess', props<{request: DeleteRequest }>());
+
+  static DeleteSuccess = createAction(
+    '[Clientes] Delete Success',
   );
 
-  static clientClientesDeleteSuccess = createAction(
-    '[Clientes] clientClientesDelete Success',
+  static DeleteSetError = createAction(
+  '[Clientes] Delete SetError',
+  props<{errors: Array<ValidationError>}>
   );
 
-  static clientClientesDeleteSetError = createAction(
-  '[Clientes] clientClientesDelete SetError',
-      props<{errors: ValidationError[]}>()
+  static FiltersFirstGetInit = createAction('[Clientes] FiltersFirstGetInit');
+  static FiltersFirstGetDataInit = createAction('[Clientes] FiltersFirstGetDataInit');
+  static FiltersFirstGetExecute = createAction(
+    '[Clientes] FiltersFirstGet Execute'
+  );
+   static FiltersFirstGetSetData = createAction('[Clientes] FiltersFirstGet SetData', props<{data: Client }>()); 
+  static FiltersFirstGetRequestUpdate = createAction('[Clientes] FiltersFirstGet RequestUpdate', props<{ request: FiltersFirstGetRequest }>());
+  static FiltersFirstGetRequestUpdateOne = createAction('[Clientes] FiltersFirstGet RequestUpdateOne', props<{ request: FiltersFirstGetRequest }>());
+  static FiltersFirstGetRequestUpdateOneSuccess = createAction('[Clientes] FiltersFirstGet RequestUpdateOneSuccess', props<{key:string,value:any}>());
+  static FiltersFirstGetRequestUpdateSuccess = createAction('[Clientes] FiltersFirstGet RequestUpdateSuccess', props<{request: FiltersFirstGetRequest }>());
+
+  static FiltersFirstGetSuccess = createAction(
+    '[Clientes] FiltersFirstGet Success',
   );
 
-  static clientClientesFiltersFirstGetInit = createAction('[Clientes] clientClientesFiltersFirstGetInit');
-  static clientClientesFiltersFirstGetExecute = createAction(
-    '[Clientes] clientClientesFiltersFirstGet Execute',
-    props<clientClientesFiltersFirstGetRequest>()
-  );
-  static clientClientesFiltersFirstGetSetData = createAction(
-    '[Clientes] clientClientesFiltersFirstGet SetData',
-    props<{data: Client }>()
+  static FiltersFirstGetSetError = createAction(
+  '[Clientes] FiltersFirstGet SetError',
+  props<{errors: Array<ValidationError>}>
   );
 
-  static clientClientesFiltersFirstGetSuccess = createAction(
-    '[Clientes] clientClientesFiltersFirstGet Success',
+  static FiltersGetInit = createAction('[Clientes] FiltersGetInit');
+  static FiltersGetDataInit = createAction('[Clientes] FiltersGetDataInit');
+  static FiltersGetExecute = createAction(
+    '[Clientes] FiltersGet Execute'
+  );
+   static FiltersGetSetData = createAction('[Clientes] FiltersGet SetData', props<{data: Pagination<Client> }>()); 
+  static FiltersGetRequestUpdate = createAction('[Clientes] FiltersGet RequestUpdate', props<{ request: FiltersGetRequest }>());
+  static FiltersGetRequestUpdateOne = createAction('[Clientes] FiltersGet RequestUpdateOne', props<{ request: FiltersGetRequest }>());
+  static FiltersGetRequestUpdateOneSuccess = createAction('[Clientes] FiltersGet RequestUpdateOneSuccess', props<{key:string,value:any}>());
+  static FiltersGetRequestUpdateSuccess = createAction('[Clientes] FiltersGet RequestUpdateSuccess', props<{request: FiltersGetRequest }>());
+
+  static FiltersGetSuccess = createAction(
+    '[Clientes] FiltersGet Success',
   );
 
-  static clientClientesFiltersFirstGetSetError = createAction(
-  '[Clientes] clientClientesFiltersFirstGet SetError',
-      props<{errors: ValidationError[]}>()
+  static FiltersGetSetError = createAction(
+  '[Clientes] FiltersGet SetError',
+  props<{errors: Array<ValidationError>}>
+  );
+     
+    static FiltersGetChangePage = createAction('[Clientes] FiltersGet ChangePage', props<{event: PageEvent }>());
+
+  static GetInit = createAction('[Clientes] GetInit');
+  static GetDataInit = createAction('[Clientes] GetDataInit');
+  static GetExecute = createAction(
+    '[Clientes] Get Execute'
+  );
+   static GetSetData = createAction('[Clientes] Get SetData', props<{data: Client }>()); 
+  static GetRequestUpdate = createAction('[Clientes] Get RequestUpdate', props<{ request: GetRequest }>());
+  static GetRequestUpdateOne = createAction('[Clientes] Get RequestUpdateOne', props<{ request: GetRequest }>());
+  static GetRequestUpdateOneSuccess = createAction('[Clientes] Get RequestUpdateOneSuccess', props<{key:string,value:any}>());
+  static GetRequestUpdateSuccess = createAction('[Clientes] Get RequestUpdateSuccess', props<{request: GetRequest }>());
+
+  static GetSuccess = createAction(
+    '[Clientes] Get Success',
   );
 
-  static clientClientesFiltersGetInit = createAction('[Clientes] clientClientesFiltersGetInit');
-  static clientClientesFiltersGetExecute = createAction(
-    '[Clientes] clientClientesFiltersGet Execute',
-    props<clientClientesFiltersGetRequest>()
-  );
-  static clientClientesFiltersGetSetData = createAction(
-    '[Clientes] clientClientesFiltersGet SetData',
-    props<{data: Pagination<Client> }>()
+  static GetSetError = createAction(
+  '[Clientes] Get SetError',
+  props<{errors: Array<ValidationError>}>
   );
 
-  static clientClientesFiltersGetSuccess = createAction(
-    '[Clientes] clientClientesFiltersGet Success',
+  static IdsGetInit = createAction('[Clientes] IdsGetInit');
+  static IdsGetDataInit = createAction('[Clientes] IdsGetDataInit');
+  static IdsGetExecute = createAction(
+    '[Clientes] IdsGet Execute'
+  );
+   static IdsGetSetData = createAction('[Clientes] IdsGet SetData', props<{data: Pagination<Client> }>()); 
+  static IdsGetRequestUpdate = createAction('[Clientes] IdsGet RequestUpdate', props<{ request: IdsGetRequest }>());
+  static IdsGetRequestUpdateOne = createAction('[Clientes] IdsGet RequestUpdateOne', props<{ request: IdsGetRequest }>());
+  static IdsGetRequestUpdateOneSuccess = createAction('[Clientes] IdsGet RequestUpdateOneSuccess', props<{key:string,value:any}>());
+  static IdsGetRequestUpdateSuccess = createAction('[Clientes] IdsGet RequestUpdateSuccess', props<{request: IdsGetRequest }>());
+
+  static IdsGetSuccess = createAction(
+    '[Clientes] IdsGet Success',
   );
 
-  static clientClientesFiltersGetSetError = createAction(
-  '[Clientes] clientClientesFiltersGet SetError',
-      props<{errors: ValidationError[]}>()
+  static IdsGetSetError = createAction(
+  '[Clientes] IdsGet SetError',
+  props<{errors: Array<ValidationError>}>
+  );
+     
+    static IdsGetChangePage = createAction('[Clientes] IdsGet ChangePage', props<{event: PageEvent }>());
+
+  static PostInit = createAction('[Clientes] PostInit');
+  static PostDataInit = createAction('[Clientes] PostDataInit');
+  static PostExecute = createAction(
+    '[Clientes] Post Execute'
+  );
+   static PostSetData = createAction('[Clientes] Post SetData', props<{data: Client }>()); 
+  static PostRequestUpdate = createAction('[Clientes] Post RequestUpdate', props<{ request: PostRequest }>());
+  static PostRequestUpdateOne = createAction('[Clientes] Post RequestUpdateOne', props<{ request: PostRequest }>());
+  static PostRequestUpdateOneSuccess = createAction('[Clientes] Post RequestUpdateOneSuccess', props<{key:string,value:any}>());
+  static PostRequestUpdateSuccess = createAction('[Clientes] Post RequestUpdateSuccess', props<{request: PostRequest }>());
+
+  static PostSuccess = createAction(
+    '[Clientes] Post Success',
   );
 
-  static clientClientesGetInit = createAction('[Clientes] clientClientesGetInit');
-  static clientClientesGetExecute = createAction(
-    '[Clientes] clientClientesGet Execute',
-    props<clientClientesGetRequest>()
-  );
-  static clientClientesGetSetData = createAction(
-    '[Clientes] clientClientesGet SetData',
-    props<{data: Client }>()
+  static PostSetError = createAction(
+  '[Clientes] Post SetError',
+  props<{errors: Array<ValidationError>}>
   );
 
-  static clientClientesGetSuccess = createAction(
-    '[Clientes] clientClientesGet Success',
+  static PutInit = createAction('[Clientes] PutInit');
+  static PutDataInit = createAction('[Clientes] PutDataInit');
+  static PutExecute = createAction(
+    '[Clientes] Put Execute'
+  );
+   static PutSetData = createAction('[Clientes] Put SetData', props<{data: Client }>()); 
+  static PutRequestUpdate = createAction('[Clientes] Put RequestUpdate', props<{ request: PutRequest }>());
+  static PutRequestUpdateOne = createAction('[Clientes] Put RequestUpdateOne', props<{ request: PutRequest }>());
+  static PutRequestUpdateOneSuccess = createAction('[Clientes] Put RequestUpdateOneSuccess', props<{key:string,value:any}>());
+  static PutRequestUpdateSuccess = createAction('[Clientes] Put RequestUpdateSuccess', props<{request: PutRequest }>());
+
+  static PutSuccess = createAction(
+    '[Clientes] Put Success',
   );
 
-  static clientClientesGetSetError = createAction(
-  '[Clientes] clientClientesGet SetError',
-      props<{errors: ValidationError[]}>()
+  static PutSetError = createAction(
+  '[Clientes] Put SetError',
+  props<{errors: Array<ValidationError>}>
   );
 
-  static clientClientesIdsGetInit = createAction('[Clientes] clientClientesIdsGetInit');
-  static clientClientesIdsGetExecute = createAction(
-    '[Clientes] clientClientesIdsGet Execute',
-    props<clientClientesIdsGetRequest>()
+  static RangeDeleteInit = createAction('[Clientes] RangeDeleteInit');
+  static RangeDeleteDataInit = createAction('[Clientes] RangeDeleteDataInit');
+  static RangeDeleteExecute = createAction(
+    '[Clientes] RangeDelete Execute'
   );
-  static clientClientesIdsGetSetData = createAction(
-    '[Clientes] clientClientesIdsGet SetData',
-    props<{data: Pagination<Client> }>()
+  
+  static RangeDeleteRequestUpdate = createAction('[Clientes] RangeDelete RequestUpdate', props<{ request: RangeDeleteRequest }>());
+  static RangeDeleteRequestUpdateOne = createAction('[Clientes] RangeDelete RequestUpdateOne', props<{ request: RangeDeleteRequest }>());
+  static RangeDeleteRequestUpdateOneSuccess = createAction('[Clientes] RangeDelete RequestUpdateOneSuccess', props<{key:string,value:any}>());
+  static RangeDeleteRequestUpdateSuccess = createAction('[Clientes] RangeDelete RequestUpdateSuccess', props<{request: RangeDeleteRequest }>());
+
+  static RangeDeleteSuccess = createAction(
+    '[Clientes] RangeDelete Success',
   );
 
-  static clientClientesIdsGetSuccess = createAction(
-    '[Clientes] clientClientesIdsGet Success',
+  static RangeDeleteSetError = createAction(
+  '[Clientes] RangeDelete SetError',
+  props<{errors: Array<ValidationError>}>
   );
 
-  static clientClientesIdsGetSetError = createAction(
-  '[Clientes] clientClientesIdsGet SetError',
-      props<{errors: ValidationError[]}>()
+  static RangePostInit = createAction('[Clientes] RangePostInit');
+  static RangePostDataInit = createAction('[Clientes] RangePostDataInit');
+  static RangePostExecute = createAction(
+    '[Clientes] RangePost Execute'
+  );
+   static RangePostSetData = createAction('[Clientes] RangePost SetData', props<{data: Pagination<Client> }>()); 
+  static RangePostRequestUpdate = createAction('[Clientes] RangePost RequestUpdate', props<{ request: RangePostRequest }>());
+  static RangePostRequestUpdateOne = createAction('[Clientes] RangePost RequestUpdateOne', props<{ request: RangePostRequest }>());
+  static RangePostRequestUpdateOneSuccess = createAction('[Clientes] RangePost RequestUpdateOneSuccess', props<{key:string,value:any}>());
+  static RangePostRequestUpdateSuccess = createAction('[Clientes] RangePost RequestUpdateSuccess', props<{request: RangePostRequest }>());
+
+  static RangePostSuccess = createAction(
+    '[Clientes] RangePost Success',
   );
 
-  static clientClientesPostInit = createAction('[Clientes] clientClientesPostInit');
-  static clientClientesPostExecute = createAction(
-    '[Clientes] clientClientesPost Execute',
-    props<clientClientesPostRequest>()
+  static RangePostSetError = createAction(
+  '[Clientes] RangePost SetError',
+  props<{errors: Array<ValidationError>}>
   );
-  static clientClientesPostSetData = createAction(
-    '[Clientes] clientClientesPost SetData',
-    props<{data: Client }>()
+     
+    static RangePostChangePage = createAction('[Clientes] RangePost ChangePage', props<{event: PageEvent }>());
+
+  static RangePutInit = createAction('[Clientes] RangePutInit');
+  static RangePutDataInit = createAction('[Clientes] RangePutDataInit');
+  static RangePutExecute = createAction(
+    '[Clientes] RangePut Execute'
+  );
+   static RangePutSetData = createAction('[Clientes] RangePut SetData', props<{data: Pagination<Client> }>()); 
+  static RangePutRequestUpdate = createAction('[Clientes] RangePut RequestUpdate', props<{ request: RangePutRequest }>());
+  static RangePutRequestUpdateOne = createAction('[Clientes] RangePut RequestUpdateOne', props<{ request: RangePutRequest }>());
+  static RangePutRequestUpdateOneSuccess = createAction('[Clientes] RangePut RequestUpdateOneSuccess', props<{key:string,value:any}>());
+  static RangePutRequestUpdateSuccess = createAction('[Clientes] RangePut RequestUpdateSuccess', props<{request: RangePutRequest }>());
+
+  static RangePutSuccess = createAction(
+    '[Clientes] RangePut Success',
   );
 
-  static clientClientesPostSuccess = createAction(
-    '[Clientes] clientClientesPost Success',
+  static RangePutSetError = createAction(
+  '[Clientes] RangePut SetError',
+  props<{errors: Array<ValidationError>}>
   );
-
-  static clientClientesPostSetError = createAction(
-  '[Clientes] clientClientesPost SetError',
-      props<{errors: ValidationError[]}>()
-  );
-
-  static clientClientesPutInit = createAction('[Clientes] clientClientesPutInit');
-  static clientClientesPutExecute = createAction(
-    '[Clientes] clientClientesPut Execute',
-    props<clientClientesPutRequest>()
-  );
-  static clientClientesPutSetData = createAction(
-    '[Clientes] clientClientesPut SetData',
-    props<{data: Client }>()
-  );
-
-  static clientClientesPutSuccess = createAction(
-    '[Clientes] clientClientesPut Success',
-  );
-
-  static clientClientesPutSetError = createAction(
-  '[Clientes] clientClientesPut SetError',
-      props<{errors: ValidationError[]}>()
-  );
-
-  static clientClientesRangeDeleteInit = createAction('[Clientes] clientClientesRangeDeleteInit');
-  static clientClientesRangeDeleteExecute = createAction(
-    '[Clientes] clientClientesRangeDelete Execute',
-    props<clientClientesRangeDeleteRequest>()
-  );
-
-  static clientClientesRangeDeleteSuccess = createAction(
-    '[Clientes] clientClientesRangeDelete Success',
-  );
-
-  static clientClientesRangeDeleteSetError = createAction(
-  '[Clientes] clientClientesRangeDelete SetError',
-      props<{errors: ValidationError[]}>()
-  );
-
-  static clientClientesRangePostInit = createAction('[Clientes] clientClientesRangePostInit');
-  static clientClientesRangePostExecute = createAction(
-    '[Clientes] clientClientesRangePost Execute',
-    props<clientClientesRangePostRequest>()
-  );
-  static clientClientesRangePostSetData = createAction(
-    '[Clientes] clientClientesRangePost SetData',
-    props<{data: Pagination<Client> }>()
-  );
-
-  static clientClientesRangePostSuccess = createAction(
-    '[Clientes] clientClientesRangePost Success',
-  );
-
-  static clientClientesRangePostSetError = createAction(
-  '[Clientes] clientClientesRangePost SetError',
-      props<{errors: ValidationError[]}>()
-  );
-
-  static clientClientesRangePutInit = createAction('[Clientes] clientClientesRangePutInit');
-  static clientClientesRangePutExecute = createAction(
-    '[Clientes] clientClientesRangePut Execute',
-    props<clientClientesRangePutRequest>()
-  );
-  static clientClientesRangePutSetData = createAction(
-    '[Clientes] clientClientesRangePut SetData',
-    props<{data: Pagination<Client> }>()
-  );
-
-  static clientClientesRangePutSuccess = createAction(
-    '[Clientes] clientClientesRangePut Success',
-  );
-
-  static clientClientesRangePutSetError = createAction(
-  '[Clientes] clientClientesRangePut SetError',
-      props<{errors: ValidationError[]}>()
-  );
+     
+    static RangePutChangePage = createAction('[Clientes] RangePut ChangePage', props<{event: PageEvent }>());
 }

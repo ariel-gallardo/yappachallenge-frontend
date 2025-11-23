@@ -1,6 +1,6 @@
 <div class="grid grid-rows-[1fr_auto] h-[90vh] gap-2">
   <div>
-    <form class="grid grid-cols-7 gap-4 mx-2" [formGroup]="form">
+    <form *ngIf="form" class="grid grid-cols-9 gap-4 mx-2" [formGroup]="form">
       <mat-form-field appearance="outline">
         <input matInput formControlName="nombre" placeholder="Nombre" (keyup)="onChangeInput($event, 'nombre')">
       </mat-form-field>
@@ -10,43 +10,27 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <input matInput formControlName="razonSocial" placeholder="Razon Social"
-          (keyup)="onChangeInput($event, 'razonSocial')">
+        <input matInput formControlName="razonSocial" placeholder="Razon Social">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <input matInput formControlName="cuit" mask="00-00000000-0" placeholder="XX-XXXXXXXX-X"
-          (keyup)="onChangeInput($event, 'cuit')">
+        <input matInput formControlName="cuit" mask="00-00000000-0" placeholder="XX-XXXXXXXX-X">
+      </mat-form-field>
+
+      <custom-date-picker [control]="fechaNacimientoMinControl" format="dd/MM/yyyy"></custom-date-picker>
+
+      <custom-date-picker [control]="fechaNacimientoMaxControl" format="dd/MM/yyyy"></custom-date-picker>
+
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="telefonoCelular" placeholder="Telefono">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <input matInput [matDatepicker]="fechaMin" formControlName="fechaNacimientoMin"
-          (dateChange)="onChangeInput($event, 'fechaNacimientoMin')">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="fechaMin"></mat-datepicker-toggle>
-        <mat-datepicker #fechaMin></mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <input matInput [matDatepicker]="fechaMax" formControlName="fechaNacimientoMax"
-          (dateChange)="onChangeInput($event, 'fechaNacimientoMax')">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="fechaMax"></mat-datepicker-toggle>
-        <mat-datepicker #fechaMax></mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="telefonoCelular" placeholder="Telefono"
-          (keyup)="onChangeInput($event, 'telefonoCelular')">
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <input type="email" matInput formControlName="email" placeholder="Email"
-          (keyup)="onChangeInput($event, 'email')">
+        <input type="email" matInput formControlName="email" placeholder="Email">
       </mat-form-field>
     </form>
 
-    <table mat-table [dataSource]="pagination.items">
+    <table *ngIf="pagination" mat-table [dataSource]="pagination.items">
 
       <ng-container matColumnDef="nombre">
         <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
@@ -102,7 +86,7 @@
   </div>
 
   <div class="flex justify-center">
-    <mat-paginator [length]="pagination.totalCount" [pageIndex]="pagination.currentPage - 1"
+    <mat-paginator *ngIf="pagination" [length]="pagination.totalCount" [pageIndex]="pagination.currentPage - 1"
       [pageSize]="pagination.pageSize" [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPageChange($event)">
     </mat-paginator>
   </div>

@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SharedModule } from '@features/shared/shared-module';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatPaginatorModule,
     MatInputModule,
     ReactiveFormsModule,
+    SharedModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     RouterModule.forChild([
       {component: ClientesList, path: ''}

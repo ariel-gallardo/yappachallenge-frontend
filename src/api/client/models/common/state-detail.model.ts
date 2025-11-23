@@ -1,14 +1,16 @@
 import {ValidationError} from '../validation-error.model';
+import { FormGroup } from '@angular/forms';
+import {NullableFormControl} from './nullable-form-control.model';
 
-export interface StateDetail<T> extends StateDetailBase
+export interface StateDetail<IData,IRequest> extends StateDetailBase<IRequest>
 {
-    data: T
+    data: IData
 }
 
-
-export interface StateDetailBase
+export interface StateDetailBase<IRequest>
 {
     isLoaded: boolean
     hasError: boolean
-    errors: ValidationError[]
+    errors: Array<ValidationError>
+    request: IRequest
 }
