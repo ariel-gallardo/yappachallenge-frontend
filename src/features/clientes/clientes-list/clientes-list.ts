@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '@api/client/models/client.model';
 import { NullableFormControl } from '@api/client/models/common/nullable-form-control.model';
 import { Pagination } from '@api/client/models/common/pagination.model';
@@ -21,7 +22,10 @@ export class ClientesList implements OnInit, OnDestroy, AfterViewInit {
   public pagination?: Pagination<Client>
   public form?: FormGroup<NullableFormControl<FiltersGetRequest>>;
 
-  constructor(private clientesFacade: ClientesFacade, private fb: FormBuilder) {
+  constructor(
+    private clientesFacade: ClientesFacade,
+    private fb: FormBuilder,
+    private router: Router, private route: ActivatedRoute) {
     this.subs = this.clientesFacade.FiltersGet$.subscribe(x => this.pagination = x);
     this.subs.add(this.clientesFacade.DeleteRequest$.subscribe(() => {
       this.clientesFacade.Delete();
@@ -73,7 +77,7 @@ export class ClientesList implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public editar(entityId: number) {
-
+    this.router.navigate(['/clientes/editar', entityId], { relativeTo: this.route });
   }
 
   public eliminar(entityId: number) {
