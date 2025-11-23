@@ -1,13 +1,12 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Client } from '@api/client/models/client.model';
 import { NullableFormControl } from '@api/client/models/common/nullable-form-control.model';
 import { Pagination } from '@api/client/models/common/pagination.model';
 import { ClientesFacade } from '@api/client/redux/clientes/clientes.facade';
 import { FiltersGetRequest } from '@api/client/services/clientes.service';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'clientes-list',
@@ -21,12 +20,13 @@ export class ClientesList implements OnInit, OnDestroy, AfterViewInit {
   private clientes: Client[] = [];
   public pagination?: Pagination<Client>
   public form?: FormGroup<NullableFormControl<FiltersGetRequest>>;
-  private inputSubject = new Subject<{ field: string; value: any }>();
-
 
   constructor(private clientesFacade: ClientesFacade, private fb: FormBuilder) {
     this.subs = this.clientesFacade.FiltersGet$.subscribe(x => this.pagination = x);
-    this.subs.add(this.clientesFacade.DeleteIsLoaded$.subscribe( x => {
+    this.subs.add(this.clientesFacade.DeleteRequest$.subscribe(() => {
+      this.clientesFacade.Delete();
+    }));
+    this.subs.add(this.clientesFacade.DeleteIsLoaded$.subscribe(() => {
       this.clientesFacade.FiltersGet();
     }));
     this.subs.add(this.clientesFacade.FiltersGetRequest$.subscribe(x => {
@@ -37,33 +37,15 @@ export class ClientesList implements OnInit, OnDestroy, AfterViewInit {
         this.subs.add(this.form.valueChanges.subscribe(x => {
           this.clientesFacade.FiltersGetRequestUpdateOne(x as FiltersGetRequest);
         }))
-      } else {
+      } else{
         this.clientesFacade.FiltersGet();
       }
     }));
 
   }
 
-  onChangeInput(event: Event | MatDatepickerInputEvent<Date>, field: string) {
-    let value: any;
-
-    if ('value' in event) {
-      value = event.value;
-      if (value != null) {
-        const dia = value.getDate().toString().padStart(2, '0');
-        const mes = (value.getMonth() + 1).toString().padStart(2, '0');
-        const anio = value.getFullYear();
-        value = `${dia}/${mes}/${anio}`;
-      }
-    } else {
-      value = (event.target as HTMLInputElement).value;
-    }
-
-    this.inputSubject.next({ field, value });
-  }
-
   ngAfterViewInit(): void {
-    //this.clientesFacade.FiltersGet();
+    this.clientesFacade.FiltersGet();
   }
 
   ngOnDestroy(): void {
@@ -72,6 +54,7 @@ export class ClientesList implements OnInit, OnDestroy, AfterViewInit {
   }
   ngOnInit(): void {
     this.clientesFacade.FiltersGetInit();
+    this.clientesFacade.DeleteInit();
   }
 
   displayedColumns: string[] = [
@@ -94,7 +77,9 @@ export class ClientesList implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public eliminar(entityId: number) {
-    //this.clientesFacade.Delete({ entityId });
+    this.clientesFacade.DeleteRequestUpdateOne({
+      entityId
+    });
   }
 
   onPageChange(e: PageEvent) {

@@ -2,11 +2,11 @@
   <div>
     <form *ngIf="form" class="grid grid-cols-9 gap-4 mx-2" [formGroup]="form">
       <mat-form-field appearance="outline">
-        <input matInput formControlName="nombre" placeholder="Nombre" (keyup)="onChangeInput($event, 'nombre')">
+        <input matInput formControlName="nombre" placeholder="Nombre">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <input matInput formControlName="apellido" placeholder="Apellido" (keyup)="onChangeInput($event, 'apellido')">
+        <input matInput formControlName="apellido" placeholder="Apellido">
       </mat-form-field>
 
       <mat-form-field appearance="outline">

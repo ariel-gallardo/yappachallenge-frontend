@@ -11,13 +11,13 @@ import {Response} from '@api/client/models/common/response.model';
 import {Pagination} from '@api/client/models/common/pagination.model';
 import { BaseResponse } from '@api/client/models/base-response.model';
 import { Client } from '@api/client/models/client.model';
-import { Client2 } from '@api/client/models/client2.model';
 import { ValidationError } from '@api/client/models/validation-error.model';
 import { ClientesReduxModule } from '@api/client/redux/clientes/clientes.module';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
 import { ServiceConfiguration } from '../configuration';
 import { BaseService } from './api.base.service';
+import { Client2 } from '../models/client2.model';
 
 
 export interface DeleteRequest {
