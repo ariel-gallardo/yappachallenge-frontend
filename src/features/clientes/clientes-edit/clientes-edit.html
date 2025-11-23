@@ -1,1 +1,34 @@
-<p>clientes-edit works!</p>
+<h3 class="text-3xl my-3 text-center uppercase">editar cliente</h3>
+<form *ngIf="form" class="grid grid-cols-1 gap-4 mx-100" [formGroup]="form" (submit)="submit()">
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="nombre" placeholder="Nombre">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="apellido" placeholder="Apellido">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="razonSocial" placeholder="Razon Social">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="cuit" mask="00-00000000-0" placeholder="XX-XXXXXXXX-X">
+      </mat-form-field>
+
+      <!--<custom-date-picker [control]="fechaNacimientoMinControl" format="dd/MM/yyyy"></custom-date-picker>
+
+      <custom-date-picker [control]="fechaNacimientoMaxControl" format="dd/MM/yyyy"></custom-date-picker>-->
+
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="telefonoCelular" placeholder="Telefono">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input type="email" matInput formControlName="email" placeholder="Email">
+      </mat-form-field>
+      <button matFab extended type="submit">
+        <mat-icon>save</mat-icon>
+        Guardar
+      </button>
+    </form>

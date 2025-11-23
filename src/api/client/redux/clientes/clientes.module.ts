@@ -6,13 +6,17 @@ import Reducer from './clientes.reducer';
 import { ClientesEffects } from './clientes.effects';
 import { ClientesService } from '@api/client/services/clientes.service';
 import { ClientesFacade } from './clientes.facade';
+import {SnackbarModule} from '@features/snackbar/snackbar-module';
+import { SnackbarService } from '@features/snackbar/snackbar-service';
+
 @NgModule({
   imports: [
     CommonModule,
     StoreModule.forFeature('Clientes', Reducer),
-    EffectsModule.forFeature([ClientesEffects])
+    EffectsModule.forFeature([ClientesEffects]),
+    SnackbarModule
   ],
-  providers: [ClientesService, ClientesFacade]
+  providers: [ClientesService, ClientesFacade, SnackbarService]
 })
 export class ClientesReduxModule {
 

@@ -37,6 +37,7 @@ import { Store } from '@ngrx/store';
 import { ValidationErrors } from '@angular/forms';
 import { ValidationError } from '@api/client/models/validation-error.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import {SnackbarService} from '@features/snackbar/snackbar-service'; 
 
 @Injectable(
     
@@ -45,6 +46,7 @@ export class ClientesEffects {
     private actions$ = inject(Actions);
     private api = inject(ClientesService);
     private store = inject(Store);
+    private snackbarService = inject(SnackbarService);
 
     Init$ = createEffect(() =>
     this.actions$.pipe(
@@ -236,11 +238,12 @@ export class ClientesEffects {
             }
 
             return this.api.FiltersFirstGet(request as FiltersFirstGetRequest, 'response').pipe(
-                map(response =>
-                ClientesActions.FiltersFirstGetSetData({
-                    data:                     response.body!.data
-                })
-                ),
+                map(response =>{
+                    
+                    return ClientesActions.FiltersFirstGetSetData({
+                        data:                         response.body!.data
+                    })
+                }),
                 
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
@@ -352,19 +355,20 @@ export class ClientesEffects {
             }
 
             return this.api.FiltersGet(request as FiltersGetRequest, 'response').pipe(
-                map(response =>
-                ClientesActions.FiltersGetSetData({
-                    data: 
-                    {
-                        //@ts-ignore
-                        items: response.body!.data,
-                        currentPage: Number(response.headers.get('X-Current-Page')),
-                        totalPages: Number(response.headers.get('X-Total-Pages')),
-                        pageSize: Number(response.headers.get('X-Page-Size')),
-                        totalCount: Number(response.headers.get('X-Total-Count'))
-                    }
-                })
-                ),
+                map(response =>{
+                    
+                    return ClientesActions.FiltersGetSetData({
+                        data: 
+                        {
+                            //@ts-ignore
+                            items: response.body!.data,
+                            currentPage: Number(response.headers.get('X-Current-Page')),
+                            totalPages: Number(response.headers.get('X-Total-Pages')),
+                            pageSize: Number(response.headers.get('X-Page-Size')),
+                            totalCount: Number(response.headers.get('X-Total-Count'))
+                        }
+                    })
+                }),
                 
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
@@ -462,11 +466,12 @@ export class ClientesEffects {
             }
 
             return this.api.Get(request as GetRequest, 'response').pipe(
-                map(response =>
-                ClientesActions.GetSetData({
-                    data:                     response.body!.data
-                })
-                ),
+                map(response =>{
+                    
+                    return ClientesActions.GetSetData({
+                        data:                         response.body!.data
+                    })
+                }),
                 
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
@@ -578,19 +583,20 @@ export class ClientesEffects {
             }
 
             return this.api.IdsGet(request as IdsGetRequest, 'response').pipe(
-                map(response =>
-                ClientesActions.IdsGetSetData({
-                    data: 
-                    {
-                        //@ts-ignore
-                        items: response.body!.data,
-                        currentPage: Number(response.headers.get('X-Current-Page')),
-                        totalPages: Number(response.headers.get('X-Total-Pages')),
-                        pageSize: Number(response.headers.get('X-Page-Size')),
-                        totalCount: Number(response.headers.get('X-Total-Count'))
-                    }
-                })
-                ),
+                map(response =>{
+                    
+                    return ClientesActions.IdsGetSetData({
+                        data: 
+                        {
+                            //@ts-ignore
+                            items: response.body!.data,
+                            currentPage: Number(response.headers.get('X-Current-Page')),
+                            totalPages: Number(response.headers.get('X-Total-Pages')),
+                            pageSize: Number(response.headers.get('X-Page-Size')),
+                            totalCount: Number(response.headers.get('X-Total-Count'))
+                        }
+                    })
+                }),
                 
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
@@ -688,11 +694,12 @@ export class ClientesEffects {
             }
 
             return this.api.Post(request as PostRequest, 'response').pipe(
-                map(response =>
-                ClientesActions.PostSetData({
-                    data:                     response.body!.data
-                })
-                ),
+                map(response =>{
+                      this.snackbarService.show(response.body!.message, response.body!.statusCode);
+                    return ClientesActions.PostSetData({
+                        data:                         response.body!.data
+                    })
+                }),
                 
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
@@ -790,11 +797,12 @@ export class ClientesEffects {
             }
 
             return this.api.Put(request as PutRequest, 'response').pipe(
-                map(response =>
-                ClientesActions.PutSetData({
-                    data:                     response.body!.data
-                })
-                ),
+                map(response =>{
+                      this.snackbarService.show(response.body!.message, response.body!.statusCode);
+                    return ClientesActions.PutSetData({
+                        data:                         response.body!.data
+                    })
+                }),
                 
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
@@ -1000,19 +1008,20 @@ export class ClientesEffects {
             }
 
             return this.api.RangePost(request as RangePostRequest, 'response').pipe(
-                map(response =>
-                ClientesActions.RangePostSetData({
-                    data: 
-                    {
-                        //@ts-ignore
-                        items: response.body!.data,
-                        currentPage: Number(response.headers.get('X-Current-Page')),
-                        totalPages: Number(response.headers.get('X-Total-Pages')),
-                        pageSize: Number(response.headers.get('X-Page-Size')),
-                        totalCount: Number(response.headers.get('X-Total-Count'))
-                    }
-                })
-                ),
+                map(response =>{
+                      this.snackbarService.show(response.body!.message, response.body!.statusCode);
+                    return ClientesActions.RangePostSetData({
+                        data: 
+                        {
+                            //@ts-ignore
+                            items: response.body!.data,
+                            currentPage: Number(response.headers.get('X-Current-Page')),
+                            totalPages: Number(response.headers.get('X-Total-Pages')),
+                            pageSize: Number(response.headers.get('X-Page-Size')),
+                            totalCount: Number(response.headers.get('X-Total-Count'))
+                        }
+                    })
+                }),
                 
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
@@ -1124,19 +1133,20 @@ export class ClientesEffects {
             }
 
             return this.api.RangePut(request as RangePutRequest, 'response').pipe(
-                map(response =>
-                ClientesActions.RangePutSetData({
-                    data: 
-                    {
-                        //@ts-ignore
-                        items: response.body!.data,
-                        currentPage: Number(response.headers.get('X-Current-Page')),
-                        totalPages: Number(response.headers.get('X-Total-Pages')),
-                        pageSize: Number(response.headers.get('X-Page-Size')),
-                        totalCount: Number(response.headers.get('X-Total-Count'))
-                    }
-                })
-                ),
+                map(response =>{
+                      this.snackbarService.show(response.body!.message, response.body!.statusCode);
+                    return ClientesActions.RangePutSetData({
+                        data: 
+                        {
+                            //@ts-ignore
+                            items: response.body!.data,
+                            currentPage: Number(response.headers.get('X-Current-Page')),
+                            totalPages: Number(response.headers.get('X-Total-Pages')),
+                            pageSize: Number(response.headers.get('X-Page-Size')),
+                            totalCount: Number(response.headers.get('X-Total-Count'))
+                        }
+                    })
+                }),
                 
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
