@@ -99,6 +99,9 @@ export class ClientesFacade {
   public DeleteInit(){
     this.store.dispatch(Actions.DeleteInit());
   }
+  public DeleteDestroy(){
+    this.store.dispatch(Actions.DeleteDestroy());
+  }
   public get FiltersFirstGetIsLoaded$(): Observable<boolean> { return this.store.select(selectFiltersFirstGetLoaded); }
   public get FiltersFirstGet$(): Observable<Client> { return this.store.select(selectFiltersFirstGetData); }
   public get FiltersFirstGetHasError$(): Observable<boolean> { return this.store.select(selectFiltersFirstGetHasError); }
@@ -115,6 +118,9 @@ export class ClientesFacade {
   }
   public FiltersFirstGetInit(){
     this.store.dispatch(Actions.FiltersFirstGetInit());
+  }
+  public FiltersFirstGetDestroy(){
+    this.store.dispatch(Actions.FiltersFirstGetDestroy());
   }
   public get FiltersGetIsLoaded$(): Observable<boolean> { return this.store.select(selectFiltersGetLoaded); }
   public get FiltersGet$(): Observable<Pagination<Client>> { return this.store.select(selectFiltersGetData); }
@@ -137,6 +143,9 @@ export class ClientesFacade {
   public FiltersGetInit(){
     this.store.dispatch(Actions.FiltersGetInit());
   }
+  public FiltersGetDestroy(){
+    this.store.dispatch(Actions.FiltersGetDestroy());
+  }
   public get GetIsLoaded$(): Observable<boolean> { return this.store.select(selectGetLoaded); }
   public get Get$(): Observable<Client> { return this.store.select(selectGetData); }
   public get GetHasError$(): Observable<boolean> { return this.store.select(selectGetHasError); }
@@ -153,6 +162,9 @@ export class ClientesFacade {
   }
   public GetInit(){
     this.store.dispatch(Actions.GetInit());
+  }
+  public GetDestroy(){
+    this.store.dispatch(Actions.GetDestroy());
   }
   public get IdsGetIsLoaded$(): Observable<boolean> { return this.store.select(selectIdsGetLoaded); }
   public get IdsGet$(): Observable<Pagination<Client>> { return this.store.select(selectIdsGetData); }
@@ -175,6 +187,9 @@ export class ClientesFacade {
   public IdsGetInit(){
     this.store.dispatch(Actions.IdsGetInit());
   }
+  public IdsGetDestroy(){
+    this.store.dispatch(Actions.IdsGetDestroy());
+  }
   public get PostIsLoaded$(): Observable<boolean> { return this.store.select(selectPostLoaded); }
   public get Post$(): Observable<Client> { return this.store.select(selectPostData); }
   public get PostHasError$(): Observable<boolean> { return this.store.select(selectPostHasError); }
@@ -191,6 +206,9 @@ export class ClientesFacade {
   }
   public PostInit(){
     this.store.dispatch(Actions.PostInit());
+  }
+  public PostDestroy(){
+    this.store.dispatch(Actions.PostDestroy());
   }
   public get PutIsLoaded$(): Observable<boolean> { return this.store.select(selectPutLoaded); }
   public get Put$(): Observable<Client> { return this.store.select(selectPutData); }
@@ -209,6 +227,9 @@ export class ClientesFacade {
   public PutInit(){
     this.store.dispatch(Actions.PutInit());
   }
+  public PutDestroy(){
+    this.store.dispatch(Actions.PutDestroy());
+  }
   public get RangeDeleteIsLoaded$(): Observable<boolean> { return this.store.select(selectRangeDeleteLoaded); }
   
   public get RangeDeleteHasError$(): Observable<boolean> { return this.store.select(selectRangeDeleteHasError); }
@@ -225,6 +246,9 @@ export class ClientesFacade {
   }
   public RangeDeleteInit(){
     this.store.dispatch(Actions.RangeDeleteInit());
+  }
+  public RangeDeleteDestroy(){
+    this.store.dispatch(Actions.RangeDeleteDestroy());
   }
   public get RangePostIsLoaded$(): Observable<boolean> { return this.store.select(selectRangePostLoaded); }
   public get RangePost$(): Observable<Pagination<Client>> { return this.store.select(selectRangePostData); }
@@ -247,6 +271,9 @@ export class ClientesFacade {
   public RangePostInit(){
     this.store.dispatch(Actions.RangePostInit());
   }
+  public RangePostDestroy(){
+    this.store.dispatch(Actions.RangePostDestroy());
+  }
   public get RangePutIsLoaded$(): Observable<boolean> { return this.store.select(selectRangePutLoaded); }
   public get RangePut$(): Observable<Pagination<Client>> { return this.store.select(selectRangePutData); }
   public get RangePutHasError$(): Observable<boolean> { return this.store.select(selectRangePutHasError); }
@@ -267,6 +294,9 @@ export class ClientesFacade {
   }
   public RangePutInit(){
     this.store.dispatch(Actions.RangePutInit());
+  }
+  public RangePutDestroy(){
+    this.store.dispatch(Actions.RangePutDestroy());
   }
 
 }

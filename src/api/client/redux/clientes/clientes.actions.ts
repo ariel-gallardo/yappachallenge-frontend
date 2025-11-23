@@ -24,6 +24,7 @@ export class ClientesActions {
   static Init = createAction('[Clientes] Init');
 
   static DeleteInit = createAction('[Clientes] DeleteInit');
+  static DeleteDestroy = createAction('[Clientes] DeleteDestroy');
   static DeleteDataInit = createAction('[Clientes] DeleteDataInit');
   static DeleteExecute = createAction(
     '[Clientes] Delete Execute'
@@ -44,6 +45,7 @@ export class ClientesActions {
   );
 
   static FiltersFirstGetInit = createAction('[Clientes] FiltersFirstGetInit');
+  static FiltersFirstGetDestroy = createAction('[Clientes] FiltersFirstGetDestroy');
   static FiltersFirstGetDataInit = createAction('[Clientes] FiltersFirstGetDataInit');
   static FiltersFirstGetExecute = createAction(
     '[Clientes] FiltersFirstGet Execute'
@@ -64,6 +66,7 @@ export class ClientesActions {
   );
 
   static FiltersGetInit = createAction('[Clientes] FiltersGetInit');
+  static FiltersGetDestroy = createAction('[Clientes] FiltersGetDestroy');
   static FiltersGetDataInit = createAction('[Clientes] FiltersGetDataInit');
   static FiltersGetExecute = createAction(
     '[Clientes] FiltersGet Execute'
@@ -86,6 +89,7 @@ export class ClientesActions {
     static FiltersGetChangePage = createAction('[Clientes] FiltersGet ChangePage', props<{event: PageEvent }>());
 
   static GetInit = createAction('[Clientes] GetInit');
+  static GetDestroy = createAction('[Clientes] GetDestroy');
   static GetDataInit = createAction('[Clientes] GetDataInit');
   static GetExecute = createAction(
     '[Clientes] Get Execute'
@@ -106,6 +110,7 @@ export class ClientesActions {
   );
 
   static IdsGetInit = createAction('[Clientes] IdsGetInit');
+  static IdsGetDestroy = createAction('[Clientes] IdsGetDestroy');
   static IdsGetDataInit = createAction('[Clientes] IdsGetDataInit');
   static IdsGetExecute = createAction(
     '[Clientes] IdsGet Execute'
@@ -128,6 +133,7 @@ export class ClientesActions {
     static IdsGetChangePage = createAction('[Clientes] IdsGet ChangePage', props<{event: PageEvent }>());
 
   static PostInit = createAction('[Clientes] PostInit');
+  static PostDestroy = createAction('[Clientes] PostDestroy');
   static PostDataInit = createAction('[Clientes] PostDataInit');
   static PostExecute = createAction(
     '[Clientes] Post Execute'
@@ -148,6 +154,7 @@ export class ClientesActions {
   );
 
   static PutInit = createAction('[Clientes] PutInit');
+  static PutDestroy = createAction('[Clientes] PutDestroy');
   static PutDataInit = createAction('[Clientes] PutDataInit');
   static PutExecute = createAction(
     '[Clientes] Put Execute'
@@ -168,6 +175,7 @@ export class ClientesActions {
   );
 
   static RangeDeleteInit = createAction('[Clientes] RangeDeleteInit');
+  static RangeDeleteDestroy = createAction('[Clientes] RangeDeleteDestroy');
   static RangeDeleteDataInit = createAction('[Clientes] RangeDeleteDataInit');
   static RangeDeleteExecute = createAction(
     '[Clientes] RangeDelete Execute'
@@ -188,6 +196,7 @@ export class ClientesActions {
   );
 
   static RangePostInit = createAction('[Clientes] RangePostInit');
+  static RangePostDestroy = createAction('[Clientes] RangePostDestroy');
   static RangePostDataInit = createAction('[Clientes] RangePostDataInit');
   static RangePostExecute = createAction(
     '[Clientes] RangePost Execute'
@@ -210,6 +219,7 @@ export class ClientesActions {
     static RangePostChangePage = createAction('[Clientes] RangePost ChangePage', props<{event: PageEvent }>());
 
   static RangePutInit = createAction('[Clientes] RangePutInit');
+  static RangePutDestroy = createAction('[Clientes] RangePutDestroy');
   static RangePutDataInit = createAction('[Clientes] RangePutDataInit');
   static RangePutExecute = createAction(
     '[Clientes] RangePut Execute'
