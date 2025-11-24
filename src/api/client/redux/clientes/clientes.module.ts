@@ -7,8 +7,7 @@ import { ClientesEffects } from './clientes.effects';
 import { ClientesService } from '@api/client/services/clientes.service';
 import { ClientesFacade } from './clientes.facade';
 import {SnackbarModule} from '@features/snackbar/snackbar-module';
-import { SnackbarService } from '@features/snackbar/snackbar-service';
-
+import {SnackbarService} from '@features/snackbar/snackbar-service';
 @NgModule({
   imports: [
     CommonModule,

@@ -6,6 +6,8 @@ import { FormGroup } from '@angular/forms';
 import { BaseResponse } from '@api/client/models/base-response.model';
 import { Client } from '@api/client/models/client.model';
 import { Client2 } from '@api/client/models/client2.model';
+import { ClientUpdate } from '@api/client/models/client-update.model';
+import { ClientUpdate2 } from '@api/client/models/client-update2.model';
 import { ValidationError } from '@api/client/models/validation-error.model';
 import { DeleteRequest } from '@api/client/services/clientes.service'; 
 import { FiltersFirstGetRequest } from '@api/client/services/clientes.service'; 

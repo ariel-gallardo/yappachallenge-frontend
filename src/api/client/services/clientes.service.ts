@@ -12,6 +12,8 @@ import {Pagination} from '@api/client/models/common/pagination.model';
 import { BaseResponse } from '@api/client/models/base-response.model';
 import { Client } from '@api/client/models/client.model';
 import { Client2 } from '@api/client/models/client2.model';
+import { ClientUpdate } from '@api/client/models/client-update.model';
+import { ClientUpdate2 } from '@api/client/models/client-update2.model';
 import { ValidationError } from '@api/client/models/validation-error.model';
 import { ClientesReduxModule } from '@api/client/redux/clientes/clientes.module';
 // @ts-ignore
@@ -65,7 +67,7 @@ export interface PostRequest {
 }
 
 export interface PutRequest {
-    client?: Client;
+    clientUpdate?: ClientUpdate;
 }
 
 export interface RangeDeleteRequest {
@@ -77,7 +79,7 @@ export interface RangePostRequest {
 }
 
 export interface RangePutRequest {
-    client2?: Client2[];
+    clientUpdate2?: ClientUpdate2[];
 }
 
 
@@ -481,7 +483,7 @@ export class ClientesService extends BaseService {
     public Put(requestParameters?: PutRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpResponse<Response<Client>>>;
     public Put(requestParameters?: PutRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpEvent<Response<Client>>>;
     public Put(requestParameters?: PutRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json',}): Observable<any> {
-        const client = requestParameters?.client;
+        const clientUpdate = requestParameters?.clientUpdate;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -520,7 +522,7 @@ export class ClientesService extends BaseService {
         const { basePath, withCredentials } = this.configuration;
         return this.httpClient.request<Client>('PUT', `${basePath}${localVarPath}`,
             {
-                body: client,
+                body: clientUpdate,
                 responseType: <any>responseType_,
                 ...(withCredentials ? { withCredentials } : {}),
                 headers: localVarHeaders,
@@ -658,7 +660,7 @@ export class ClientesService extends BaseService {
     public RangePut(requestParameters?: RangePutRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpResponse<Response<Pagination<Client>>>>;
     public RangePut(requestParameters?: RangePutRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpEvent<Response<Pagination<Client>>>>;
     public RangePut(requestParameters?: RangePutRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json',}): Observable<any> {
-        const client2 = requestParameters?.client2;
+        const clientUpdate2 = requestParameters?.clientUpdate2;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -697,7 +699,7 @@ export class ClientesService extends BaseService {
         const { basePath, withCredentials } = this.configuration;
         return this.httpClient.request<Client[]>('PUT', `${basePath}${localVarPath}`,
             {
-                body: client2,
+                body: clientUpdate2,
                 responseType: <any>responseType_,
                 ...(withCredentials ? { withCredentials } : {}),
                 headers: localVarHeaders,

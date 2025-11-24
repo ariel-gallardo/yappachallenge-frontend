@@ -22,16 +22,19 @@ export class ClientesEdit implements OnInit, OnDestroy, AfterViewInit {
     this.subs = this.clientesFacade.Get$.pipe(filter(c => c?.id !== undefined)).subscribe(client => {
       this.client$.next(client);
     });
-    this.subs.add(this.clientesFacade.PutRequest$.pipe(filter(c => c?.client?.id!== undefined)).subscribe(({client}) => {
-        this.form = this.fb.group(client!);
+    this.subs.add(this.clientesFacade.PutRequest$.pipe(filter(c => c.clientUpdate?.id!== undefined)).subscribe(({clientUpdate}) => {
+      
+        this.form = this.fb.group(clientUpdate!);
          this.subs.add(this.form.valueChanges.subscribe(x => {
-           this.clientesFacade.PutRequestUpdateOne({client: x} as PutRequest);
+           this.clientesFacade.PutRequestUpdateOne({clientUpdate: x} as PutRequest);
          }))
+      
     }))
     this.subs.add(this.client$.pipe(filter(c => c?.id !== undefined)).subscribe(client => {
-      this.clientesFacade.PutRequestUpdate({client});
+      this.clientesFacade.PutRequestUpdate({clientUpdate: client});
     }))
     this.subs.add(this.clientesFacade.GetRequest$.subscribe(r => this.clientesFacade.Get()));
+    this.subs.add(this.clientesFacade.PutIsLoaded$.pipe(filter(p => p)).subscribe(x => this.clientesFacade.Get()))
   }
   ngOnInit(): void {
     this.clientesFacade.GetInit();
@@ -54,13 +57,8 @@ export class ClientesEdit implements OnInit, OnDestroy, AfterViewInit {
     this.clientesFacade.Put();
   }
 
-  public get fechaNacimientoMinControl(): FormControl<string> {
-    //@ts-ignore
-    return this.form.get('fechaNacimientoMin') as FormControl<string>;
+  public get fechaNacimiento(): FormControl<string> {
+    return this.form?.get('fechaNacimiento') as FormControl<string>;
   }
 
-  public get fechaNacimientoMaxControl(): FormControl<string> {
-    //@ts-ignore
-    return this.form.get('fechaNacimientoMax') as FormControl<string>;
-  }
 }

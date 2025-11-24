@@ -5,6 +5,8 @@ import {Pagination} from '@api/client/models/common/pagination.model';
 import { BaseResponse } from '@api/client/models/base-response.model';
 import { Client } from '@api/client/models/client.model';
 import { Client2 } from '@api/client/models/client2.model';
+import { ClientUpdate } from '@api/client/models/client-update.model';
+import { ClientUpdate2 } from '@api/client/models/client-update2.model';
 import { ValidationError } from '@api/client/models/validation-error.model';
 import { DeleteRequest } from '@api/client/services/clientes.service'; 
 import { FiltersFirstGetRequest } from '@api/client/services/clientes.service'; 
@@ -105,7 +107,7 @@ const initialState = {
         errors: Array.of<ValidationError>(),
         data: {  } as Client,
         request: {
-            client: {},
+            clientUpdate: {},
         } as PutRequest,
     },
     RangeDelete: {
@@ -135,7 +137,7 @@ const initialState = {
         errors: Array.of<ValidationError>(),
         data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client>,
         request: {
-            client2: [],
+            clientUpdate2: [],
         } as RangePutRequest,
     },
 } as State;
