@@ -5,6 +5,7 @@ import { formatDate } from '@angular/common';
 @Component({
   selector: 'custom-date-picker',
   templateUrl: './custom-date-picker.html',
+  styleUrl: './custom-date-picker.scss',
   standalone: false
 })
 export class CustomDatePicker implements OnInit {

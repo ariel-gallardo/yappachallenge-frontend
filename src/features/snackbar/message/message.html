@@ -1,7 +1,4 @@
-<div class="flex items-center gap-3 px-4 py-3 rounded text-white"
-     [ngClass]="bgClass">
-
-  <mat-icon class="text-white">{{ icon }}</mat-icon>
-
+<div class="message" [ngClass]="statusClass">
+  <mat-icon>{{ icon }}</mat-icon>
   <span>{{ text }}</span>
 </div>

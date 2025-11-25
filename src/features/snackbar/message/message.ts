@@ -3,17 +3,16 @@ import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'message',
-  standalone: false,
   templateUrl: './message.html',
-  styleUrl: './message.css'
+  styleUrls: ['./message.scss'],
+  standalone: false
 })
 export class Message implements OnInit {
 
   text = '';
   status = 200;
-
   icon = 'info';
-  bgClass = 'bg-slate-600';
+  statusClass = 'default';
 
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {}
 
@@ -24,26 +23,21 @@ export class Message implements OnInit {
   }
 
   private mapStatus(status: number) {
-
     if (status >= 200 && status <= 201) {
       this.icon = 'check_circle';
-      this.bgClass = 'bg-green-600';
-    }
-    else if (status >= 202 && status < 300) {
+      this.statusClass = 'success';
+    } else if (status >= 202 && status < 300) {
       this.icon = 'check';
-      this.bgClass = 'bg-blue-600';
-    }
-    else if (status >= 400 && status < 500) {
+      this.statusClass = 'info';
+    } else if (status >= 400 && status < 500) {
       this.icon = 'warning';
-      this.bgClass = 'bg-yellow-600 text-black';
-    }
-    else if (status >= 500) {
+      this.statusClass = 'warning';
+    } else if (status >= 500) {
       this.icon = 'error';
-      this.bgClass = 'bg-red-600';
-    }
-    else {
+      this.statusClass = 'error';
+    } else {
       this.icon = 'info';
-      this.bgClass = 'bg-slate-600';
+      this.statusClass = 'default';
     }
   }
 }

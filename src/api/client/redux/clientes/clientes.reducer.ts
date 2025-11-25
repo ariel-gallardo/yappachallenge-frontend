@@ -26,9 +26,7 @@ const initialState = {
         isLoaded: false,
         errors: Array.of<ValidationError>(),
         
-        request: {
-            entityId: undefined,
-        } as DeleteRequest,
+        request: new DeleteRequest(),
     },
     FiltersFirstGet: {
         firstInit: true,
@@ -36,17 +34,7 @@ const initialState = {
         isLoaded: false,
         errors: Array.of<ValidationError>(),
         data: {  } as Client,
-        request: {
-            nombre: undefined,
-            apellido: undefined,
-            razonSocial: undefined,
-            cuit: undefined,
-            fechaNacimientoMin: undefined,
-            fechaNacimientoMax: undefined,
-            telefonoCelular: undefined,
-            email: undefined,
-            orderBy: undefined,
-        } as FiltersFirstGetRequest,
+        request: new FiltersFirstGetRequest(),
     },
     FiltersGet: {
         firstInit: true,
@@ -54,19 +42,7 @@ const initialState = {
         isLoaded: false,
         errors: Array.of<ValidationError>(),
         data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client>,
-        request: {
-            nombre: undefined,
-            apellido: undefined,
-            razonSocial: undefined,
-            cuit: undefined,
-            fechaNacimientoMin: undefined,
-            fechaNacimientoMax: undefined,
-            telefonoCelular: undefined,
-            email: undefined,
-            orderBy: undefined,
-            page: undefined,
-            pageSize: undefined,
-        } as FiltersGetRequest,
+        request: new FiltersGetRequest(),
     },
     Get: {
         firstInit: true,
@@ -74,9 +50,7 @@ const initialState = {
         isLoaded: false,
         errors: Array.of<ValidationError>(),
         data: {  } as Client,
-        request: {
-            entityId: undefined,
-        } as GetRequest,
+        request: new GetRequest(),
     },
     IdsGet: {
         firstInit: true,
@@ -84,11 +58,7 @@ const initialState = {
         isLoaded: false,
         errors: Array.of<ValidationError>(),
         data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client>,
-        request: {
-            entityIds: [],
-            page: undefined,
-            pageSize: undefined,
-        } as IdsGetRequest,
+        request: new IdsGetRequest(),
     },
     Post: {
         firstInit: true,
@@ -96,9 +66,7 @@ const initialState = {
         isLoaded: false,
         errors: Array.of<ValidationError>(),
         data: {  } as Client,
-        request: {
-            client: {},
-        } as PostRequest,
+        request: new PostRequest(),
     },
     Put: {
         firstInit: true,
@@ -106,9 +74,7 @@ const initialState = {
         isLoaded: false,
         errors: Array.of<ValidationError>(),
         data: {  } as Client,
-        request: {
-            clientUpdate: {},
-        } as PutRequest,
+        request: new PutRequest(),
     },
     RangeDelete: {
         firstInit: true,
@@ -116,9 +82,7 @@ const initialState = {
         isLoaded: false,
         errors: Array.of<ValidationError>(),
         
-        request: {
-            requestBody: [],
-        } as RangeDeleteRequest,
+        request: new RangeDeleteRequest(),
     },
     RangePost: {
         firstInit: true,
@@ -126,9 +90,7 @@ const initialState = {
         isLoaded: false,
         errors: Array.of<ValidationError>(),
         data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client>,
-        request: {
-            client2: [],
-        } as RangePostRequest,
+        request: new RangePostRequest(),
     },
     RangePut: {
         firstInit: true,
@@ -136,17 +98,17 @@ const initialState = {
         isLoaded: false,
         errors: Array.of<ValidationError>(),
         data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client>,
-        request: {
-            clientUpdate2: [],
-        } as RangePutRequest,
+        request: new RangePutRequest(),
     },
 } as State;
 
 const reducer = createReducer<State>(
   initialState,
     // @ts-ignore
-    on(Actions.DeleteInit, state => ({...state, Delete:{ ...state.Delete, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false}})),
-    on(Actions.DeleteDestroy, state => ({...state, Delete:{ ...state.Delete, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false}})),
+    on(Actions.DeleteInit, state => ({...state, Delete:{ ...state.Delete, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, request: new DeleteRequest()} })),
+    // @ts-ignore
+    on(Actions.DeleteDestroy, state => ({...state, Delete:{ ...state.Delete, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, request: null}})),
+    // @ts-ignore
     
     // @ts-ignore
     
@@ -156,10 +118,13 @@ const reducer = createReducer<State>(
     on(Actions.DeleteSuccess, (state) => ({ ...state, Delete: {...state.Delete, data: state?.Delete?.data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
     // @ts-ignore
     on(Actions.DeleteRequestUpdateOneSuccess, (state, {key, value}) => ({ ...state, Delete: {...state.Delete, ...state.Delete ,request: {...state.Delete.request, [key]:value} }})),
+    // @ts-ignore
     on(Actions.DeleteRequestUpdateSuccess, (state, {request}) => ({ ...state, Delete: {...state.Delete, ...state.Delete ,request: request }})),
     // @ts-ignore
-    on(Actions.FiltersFirstGetInit, state => ({...state, FiltersFirstGet:{ ...state.FiltersFirstGet, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client }})),
-    on(Actions.FiltersFirstGetDestroy, state => ({...state, FiltersFirstGet:{ ...state.FiltersFirstGet, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client }})),
+    on(Actions.FiltersFirstGetInit, state => ({...state, FiltersFirstGet:{ ...state.FiltersFirstGet, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client , request: new FiltersFirstGetRequest()} })),
+    // @ts-ignore
+    on(Actions.FiltersFirstGetDestroy, state => ({...state, FiltersFirstGet:{ ...state.FiltersFirstGet, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client , request: null}})),
+    // @ts-ignore
     on(Actions.FiltersFirstGetDataInit, state => ({...state, FiltersFirstGet:{ ...state.FiltersFirstGet, data: {  } as Client}})),
     // @ts-ignore
     on(Actions.FiltersFirstGetSetData, (state, {data}) => ({ ...state, FiltersFirstGet: {...state.FiltersFirstGet, data: data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
@@ -169,10 +134,13 @@ const reducer = createReducer<State>(
     on(Actions.FiltersFirstGetSuccess, (state) => ({ ...state, FiltersFirstGet: {...state.FiltersFirstGet, data: state?.FiltersFirstGet?.data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
     // @ts-ignore
     on(Actions.FiltersFirstGetRequestUpdateOneSuccess, (state, {key, value}) => ({ ...state, FiltersFirstGet: {...state.FiltersFirstGet, ...state.FiltersFirstGet ,request: {...state.FiltersFirstGet.request, [key]:value} }})),
+    // @ts-ignore
     on(Actions.FiltersFirstGetRequestUpdateSuccess, (state, {request}) => ({ ...state, FiltersFirstGet: {...state.FiltersFirstGet, ...state.FiltersFirstGet ,request: request }})),
     // @ts-ignore
-    on(Actions.FiltersGetInit, state => ({...state, FiltersGet:{ ...state.FiltersGet, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> }})),
-    on(Actions.FiltersGetDestroy, state => ({...state, FiltersGet:{ ...state.FiltersGet, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> }})),
+    on(Actions.FiltersGetInit, state => ({...state, FiltersGet:{ ...state.FiltersGet, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> , request: new FiltersGetRequest()} })),
+    // @ts-ignore
+    on(Actions.FiltersGetDestroy, state => ({...state, FiltersGet:{ ...state.FiltersGet, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> , request: null}})),
+    // @ts-ignore
     on(Actions.FiltersGetDataInit, state => ({...state, FiltersGet:{ ...state.FiltersGet, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client>}})),
     // @ts-ignore
     on(Actions.FiltersGetSetData, (state, {data}) => ({ ...state, FiltersGet: {...state.FiltersGet, data: data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
@@ -182,10 +150,13 @@ const reducer = createReducer<State>(
     on(Actions.FiltersGetSuccess, (state) => ({ ...state, FiltersGet: {...state.FiltersGet, data: state?.FiltersGet?.data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
     // @ts-ignore
     on(Actions.FiltersGetRequestUpdateOneSuccess, (state, {key, value}) => ({ ...state, FiltersGet: {...state.FiltersGet, ...state.FiltersGet ,request: {...state.FiltersGet.request, [key]:value} }})),
+    // @ts-ignore
     on(Actions.FiltersGetRequestUpdateSuccess, (state, {request}) => ({ ...state, FiltersGet: {...state.FiltersGet, ...state.FiltersGet ,request: request }})),
     // @ts-ignore
-    on(Actions.GetInit, state => ({...state, Get:{ ...state.Get, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client }})),
-    on(Actions.GetDestroy, state => ({...state, Get:{ ...state.Get, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client }})),
+    on(Actions.GetInit, state => ({...state, Get:{ ...state.Get, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client , request: new GetRequest()} })),
+    // @ts-ignore
+    on(Actions.GetDestroy, state => ({...state, Get:{ ...state.Get, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client , request: null}})),
+    // @ts-ignore
     on(Actions.GetDataInit, state => ({...state, Get:{ ...state.Get, data: {  } as Client}})),
     // @ts-ignore
     on(Actions.GetSetData, (state, {data}) => ({ ...state, Get: {...state.Get, data: data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
@@ -195,10 +166,13 @@ const reducer = createReducer<State>(
     on(Actions.GetSuccess, (state) => ({ ...state, Get: {...state.Get, data: state?.Get?.data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
     // @ts-ignore
     on(Actions.GetRequestUpdateOneSuccess, (state, {key, value}) => ({ ...state, Get: {...state.Get, ...state.Get ,request: {...state.Get.request, [key]:value} }})),
+    // @ts-ignore
     on(Actions.GetRequestUpdateSuccess, (state, {request}) => ({ ...state, Get: {...state.Get, ...state.Get ,request: request }})),
     // @ts-ignore
-    on(Actions.IdsGetInit, state => ({...state, IdsGet:{ ...state.IdsGet, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> }})),
-    on(Actions.IdsGetDestroy, state => ({...state, IdsGet:{ ...state.IdsGet, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> }})),
+    on(Actions.IdsGetInit, state => ({...state, IdsGet:{ ...state.IdsGet, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> , request: new IdsGetRequest()} })),
+    // @ts-ignore
+    on(Actions.IdsGetDestroy, state => ({...state, IdsGet:{ ...state.IdsGet, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> , request: null}})),
+    // @ts-ignore
     on(Actions.IdsGetDataInit, state => ({...state, IdsGet:{ ...state.IdsGet, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client>}})),
     // @ts-ignore
     on(Actions.IdsGetSetData, (state, {data}) => ({ ...state, IdsGet: {...state.IdsGet, data: data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
@@ -208,10 +182,13 @@ const reducer = createReducer<State>(
     on(Actions.IdsGetSuccess, (state) => ({ ...state, IdsGet: {...state.IdsGet, data: state?.IdsGet?.data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
     // @ts-ignore
     on(Actions.IdsGetRequestUpdateOneSuccess, (state, {key, value}) => ({ ...state, IdsGet: {...state.IdsGet, ...state.IdsGet ,request: {...state.IdsGet.request, [key]:value} }})),
+    // @ts-ignore
     on(Actions.IdsGetRequestUpdateSuccess, (state, {request}) => ({ ...state, IdsGet: {...state.IdsGet, ...state.IdsGet ,request: request }})),
     // @ts-ignore
-    on(Actions.PostInit, state => ({...state, Post:{ ...state.Post, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client }})),
-    on(Actions.PostDestroy, state => ({...state, Post:{ ...state.Post, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client }})),
+    on(Actions.PostInit, state => ({...state, Post:{ ...state.Post, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client , request: new PostRequest()} })),
+    // @ts-ignore
+    on(Actions.PostDestroy, state => ({...state, Post:{ ...state.Post, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client , request: null}})),
+    // @ts-ignore
     on(Actions.PostDataInit, state => ({...state, Post:{ ...state.Post, data: {  } as Client}})),
     // @ts-ignore
     on(Actions.PostSetData, (state, {data}) => ({ ...state, Post: {...state.Post, data: data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
@@ -221,10 +198,13 @@ const reducer = createReducer<State>(
     on(Actions.PostSuccess, (state) => ({ ...state, Post: {...state.Post, data: state?.Post?.data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
     // @ts-ignore
     on(Actions.PostRequestUpdateOneSuccess, (state, {key, value}) => ({ ...state, Post: {...state.Post, ...state.Post ,request: {...state.Post.request, [key]:value} }})),
+    // @ts-ignore
     on(Actions.PostRequestUpdateSuccess, (state, {request}) => ({ ...state, Post: {...state.Post, ...state.Post ,request: request }})),
     // @ts-ignore
-    on(Actions.PutInit, state => ({...state, Put:{ ...state.Put, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client }})),
-    on(Actions.PutDestroy, state => ({...state, Put:{ ...state.Put, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client }})),
+    on(Actions.PutInit, state => ({...state, Put:{ ...state.Put, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client , request: new PutRequest()} })),
+    // @ts-ignore
+    on(Actions.PutDestroy, state => ({...state, Put:{ ...state.Put, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: {  } as Client , request: null}})),
+    // @ts-ignore
     on(Actions.PutDataInit, state => ({...state, Put:{ ...state.Put, data: {  } as Client}})),
     // @ts-ignore
     on(Actions.PutSetData, (state, {data}) => ({ ...state, Put: {...state.Put, data: data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
@@ -234,10 +214,13 @@ const reducer = createReducer<State>(
     on(Actions.PutSuccess, (state) => ({ ...state, Put: {...state.Put, data: state?.Put?.data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
     // @ts-ignore
     on(Actions.PutRequestUpdateOneSuccess, (state, {key, value}) => ({ ...state, Put: {...state.Put, ...state.Put ,request: {...state.Put.request, [key]:value} }})),
+    // @ts-ignore
     on(Actions.PutRequestUpdateSuccess, (state, {request}) => ({ ...state, Put: {...state.Put, ...state.Put ,request: request }})),
     // @ts-ignore
-    on(Actions.RangeDeleteInit, state => ({...state, RangeDelete:{ ...state.RangeDelete, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false}})),
-    on(Actions.RangeDeleteDestroy, state => ({...state, RangeDelete:{ ...state.RangeDelete, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false}})),
+    on(Actions.RangeDeleteInit, state => ({...state, RangeDelete:{ ...state.RangeDelete, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, request: new RangeDeleteRequest()} })),
+    // @ts-ignore
+    on(Actions.RangeDeleteDestroy, state => ({...state, RangeDelete:{ ...state.RangeDelete, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, request: null}})),
+    // @ts-ignore
     
     // @ts-ignore
     
@@ -247,10 +230,13 @@ const reducer = createReducer<State>(
     on(Actions.RangeDeleteSuccess, (state) => ({ ...state, RangeDelete: {...state.RangeDelete, data: state?.RangeDelete?.data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
     // @ts-ignore
     on(Actions.RangeDeleteRequestUpdateOneSuccess, (state, {key, value}) => ({ ...state, RangeDelete: {...state.RangeDelete, ...state.RangeDelete ,request: {...state.RangeDelete.request, [key]:value} }})),
+    // @ts-ignore
     on(Actions.RangeDeleteRequestUpdateSuccess, (state, {request}) => ({ ...state, RangeDelete: {...state.RangeDelete, ...state.RangeDelete ,request: request }})),
     // @ts-ignore
-    on(Actions.RangePostInit, state => ({...state, RangePost:{ ...state.RangePost, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> }})),
-    on(Actions.RangePostDestroy, state => ({...state, RangePost:{ ...state.RangePost, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> }})),
+    on(Actions.RangePostInit, state => ({...state, RangePost:{ ...state.RangePost, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> , request: new RangePostRequest()} })),
+    // @ts-ignore
+    on(Actions.RangePostDestroy, state => ({...state, RangePost:{ ...state.RangePost, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> , request: null}})),
+    // @ts-ignore
     on(Actions.RangePostDataInit, state => ({...state, RangePost:{ ...state.RangePost, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client>}})),
     // @ts-ignore
     on(Actions.RangePostSetData, (state, {data}) => ({ ...state, RangePost: {...state.RangePost, data: data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
@@ -260,10 +246,13 @@ const reducer = createReducer<State>(
     on(Actions.RangePostSuccess, (state) => ({ ...state, RangePost: {...state.RangePost, data: state?.RangePost?.data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
     // @ts-ignore
     on(Actions.RangePostRequestUpdateOneSuccess, (state, {key, value}) => ({ ...state, RangePost: {...state.RangePost, ...state.RangePost ,request: {...state.RangePost.request, [key]:value} }})),
+    // @ts-ignore
     on(Actions.RangePostRequestUpdateSuccess, (state, {request}) => ({ ...state, RangePost: {...state.RangePost, ...state.RangePost ,request: request }})),
     // @ts-ignore
-    on(Actions.RangePutInit, state => ({...state, RangePut:{ ...state.RangePut, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> }})),
-    on(Actions.RangePutDestroy, state => ({...state, RangePut:{ ...state.RangePut, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> }})),
+    on(Actions.RangePutInit, state => ({...state, RangePut:{ ...state.RangePut, firstInit: false, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> , request: new RangePutRequest()} })),
+    // @ts-ignore
+    on(Actions.RangePutDestroy, state => ({...state, RangePut:{ ...state.RangePut, firstInit: true, hasError: false, errors: Array.of<ValidationError>(),  isLoaded: false, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client> , request: null}})),
+    // @ts-ignore
     on(Actions.RangePutDataInit, state => ({...state, RangePut:{ ...state.RangePut, data: { currentPage: 0,totalPages: 0,pageSize: 0,totalCount: 0, items: [] } as Pagination<Client>}})),
     // @ts-ignore
     on(Actions.RangePutSetData, (state, {data}) => ({ ...state, RangePut: {...state.RangePut, data: data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
@@ -273,6 +262,7 @@ const reducer = createReducer<State>(
     on(Actions.RangePutSuccess, (state) => ({ ...state, RangePut: {...state.RangePut, data: state?.RangePut?.data, isLoaded: true, hasError: false, errors: Array.of<ValidationError>() }})),
     // @ts-ignore
     on(Actions.RangePutRequestUpdateOneSuccess, (state, {key, value}) => ({ ...state, RangePut: {...state.RangePut, ...state.RangePut ,request: {...state.RangePut.request, [key]:value} }})),
+    // @ts-ignore
     on(Actions.RangePutRequestUpdateSuccess, (state, {request}) => ({ ...state, RangePut: {...state.RangePut, ...state.RangePut ,request: request }})),
 );
 

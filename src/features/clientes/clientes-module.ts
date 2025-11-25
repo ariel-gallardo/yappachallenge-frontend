@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import Routes from './routes';
 import { ClientShell } from './client-shell/client-shell';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -12,6 +14,8 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
   ],
   imports: [
     CommonModule,
+    MatSidenavModule,
+    MatListModule,
     ClientesReduxModule,
     NgxMaskDirective,
     NgxMaskPipe,

@@ -98,9 +98,15 @@ export class ClientesEffects {
         return [updated, true] as const;
         }),
         filter(([_, status]) => status),
-        map(([request]) => 
-        ClientesActions.DeleteRequestUpdateSuccess({ request })
-        )
+        // @ts-ignore
+        map(([request]) => {
+            // @ts-ignore
+            const nRequest = new DeleteRequest();
+            // @ts-ignore
+            Object.assign(nRequest,request);
+            // @ts-ignore
+            return ClientesActions.DeleteRequestUpdateSuccess({ request: nRequest });
+        })
     )
     );
     DeleteUpdateOneRequest$ = createEffect(() =>
@@ -139,7 +145,7 @@ export class ClientesEffects {
                 this.store.select(selectDeleteFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit) {
+            if (firstInit || request.IsEmpty()) {
                 return EMPTY; 
             }
 
@@ -192,9 +198,15 @@ export class ClientesEffects {
         return [updated, true] as const;
         }),
         filter(([_, status]) => status),
-        map(([request]) => 
-        ClientesActions.FiltersFirstGetRequestUpdateSuccess({ request })
-        )
+        // @ts-ignore
+        map(([request]) => {
+            // @ts-ignore
+            const nRequest = new FiltersFirstGetRequest();
+            // @ts-ignore
+            Object.assign(nRequest,request);
+            // @ts-ignore
+            return ClientesActions.FiltersFirstGetRequestUpdateSuccess({ request: nRequest });
+        })
     )
     );
     FiltersFirstGetUpdateOneRequest$ = createEffect(() =>
@@ -233,7 +245,7 @@ export class ClientesEffects {
                 this.store.select(selectFiltersFirstGetFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit) {
+            if (firstInit || request.IsEmpty()) {
                 return EMPTY; 
             }
 
@@ -309,9 +321,15 @@ export class ClientesEffects {
         return [updated, true] as const;
         }),
         filter(([_, status]) => status),
-        map(([request]) => 
-        ClientesActions.FiltersGetRequestUpdateSuccess({ request })
-        )
+        // @ts-ignore
+        map(([request]) => {
+            // @ts-ignore
+            const nRequest = new FiltersGetRequest();
+            // @ts-ignore
+            Object.assign(nRequest,request);
+            // @ts-ignore
+            return ClientesActions.FiltersGetRequestUpdateSuccess({ request: nRequest });
+        })
     )
     );
     FiltersGetUpdateOneRequest$ = createEffect(() =>
@@ -350,7 +368,7 @@ export class ClientesEffects {
                 this.store.select(selectFiltersGetFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit) {
+            if (firstInit || request.IsEmpty()) {
                 return EMPTY; 
             }
 
@@ -420,9 +438,15 @@ export class ClientesEffects {
         return [updated, true] as const;
         }),
         filter(([_, status]) => status),
-        map(([request]) => 
-        ClientesActions.GetRequestUpdateSuccess({ request })
-        )
+        // @ts-ignore
+        map(([request]) => {
+            // @ts-ignore
+            const nRequest = new GetRequest();
+            // @ts-ignore
+            Object.assign(nRequest,request);
+            // @ts-ignore
+            return ClientesActions.GetRequestUpdateSuccess({ request: nRequest });
+        })
     )
     );
     GetUpdateOneRequest$ = createEffect(() =>
@@ -461,7 +485,7 @@ export class ClientesEffects {
                 this.store.select(selectGetFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit) {
+            if (firstInit || request.IsEmpty()) {
                 return EMPTY; 
             }
 
@@ -537,9 +561,15 @@ export class ClientesEffects {
         return [updated, true] as const;
         }),
         filter(([_, status]) => status),
-        map(([request]) => 
-        ClientesActions.IdsGetRequestUpdateSuccess({ request })
-        )
+        // @ts-ignore
+        map(([request]) => {
+            // @ts-ignore
+            const nRequest = new IdsGetRequest();
+            // @ts-ignore
+            Object.assign(nRequest,request);
+            // @ts-ignore
+            return ClientesActions.IdsGetRequestUpdateSuccess({ request: nRequest });
+        })
     )
     );
     IdsGetUpdateOneRequest$ = createEffect(() =>
@@ -578,7 +608,7 @@ export class ClientesEffects {
                 this.store.select(selectIdsGetFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit) {
+            if (firstInit || request.IsEmpty()) {
                 return EMPTY; 
             }
 
@@ -648,9 +678,15 @@ export class ClientesEffects {
         return [updated, true] as const;
         }),
         filter(([_, status]) => status),
-        map(([request]) => 
-        ClientesActions.PostRequestUpdateSuccess({ request })
-        )
+        // @ts-ignore
+        map(([request]) => {
+            // @ts-ignore
+            const nRequest = new PostRequest();
+            // @ts-ignore
+            Object.assign(nRequest,request);
+            // @ts-ignore
+            return ClientesActions.PostRequestUpdateSuccess({ request: nRequest });
+        })
     )
     );
     PostUpdateOneRequest$ = createEffect(() =>
@@ -689,7 +725,7 @@ export class ClientesEffects {
                 this.store.select(selectPostFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit) {
+            if (firstInit || request.IsEmpty()) {
                 return EMPTY; 
             }
 
@@ -751,9 +787,15 @@ export class ClientesEffects {
         return [updated, true] as const;
         }),
         filter(([_, status]) => status),
-        map(([request]) => 
-        ClientesActions.PutRequestUpdateSuccess({ request })
-        )
+        // @ts-ignore
+        map(([request]) => {
+            // @ts-ignore
+            const nRequest = new PutRequest();
+            // @ts-ignore
+            Object.assign(nRequest,request);
+            // @ts-ignore
+            return ClientesActions.PutRequestUpdateSuccess({ request: nRequest });
+        })
     )
     );
     PutUpdateOneRequest$ = createEffect(() =>
@@ -792,7 +834,7 @@ export class ClientesEffects {
                 this.store.select(selectPutFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit) {
+            if (firstInit || request.IsEmpty()) {
                 return EMPTY; 
             }
 
@@ -854,9 +896,15 @@ export class ClientesEffects {
         return [updated, true] as const;
         }),
         filter(([_, status]) => status),
-        map(([request]) => 
-        ClientesActions.RangeDeleteRequestUpdateSuccess({ request })
-        )
+        // @ts-ignore
+        map(([request]) => {
+            // @ts-ignore
+            const nRequest = new RangeDeleteRequest();
+            // @ts-ignore
+            Object.assign(nRequest,request);
+            // @ts-ignore
+            return ClientesActions.RangeDeleteRequestUpdateSuccess({ request: nRequest });
+        })
     )
     );
     RangeDeleteUpdateOneRequest$ = createEffect(() =>
@@ -895,7 +943,7 @@ export class ClientesEffects {
                 this.store.select(selectRangeDeleteFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit) {
+            if (firstInit || request.IsEmpty()) {
                 return EMPTY; 
             }
 
@@ -962,9 +1010,15 @@ export class ClientesEffects {
         return [updated, true] as const;
         }),
         filter(([_, status]) => status),
-        map(([request]) => 
-        ClientesActions.RangePostRequestUpdateSuccess({ request })
-        )
+        // @ts-ignore
+        map(([request]) => {
+            // @ts-ignore
+            const nRequest = new RangePostRequest();
+            // @ts-ignore
+            Object.assign(nRequest,request);
+            // @ts-ignore
+            return ClientesActions.RangePostRequestUpdateSuccess({ request: nRequest });
+        })
     )
     );
     RangePostUpdateOneRequest$ = createEffect(() =>
@@ -1003,7 +1057,7 @@ export class ClientesEffects {
                 this.store.select(selectRangePostFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit) {
+            if (firstInit || request.IsEmpty()) {
                 return EMPTY; 
             }
 
@@ -1087,9 +1141,15 @@ export class ClientesEffects {
         return [updated, true] as const;
         }),
         filter(([_, status]) => status),
-        map(([request]) => 
-        ClientesActions.RangePutRequestUpdateSuccess({ request })
-        )
+        // @ts-ignore
+        map(([request]) => {
+            // @ts-ignore
+            const nRequest = new RangePutRequest();
+            // @ts-ignore
+            Object.assign(nRequest,request);
+            // @ts-ignore
+            return ClientesActions.RangePutRequestUpdateSuccess({ request: nRequest });
+        })
     )
     );
     RangePutUpdateOneRequest$ = createEffect(() =>
@@ -1128,7 +1188,7 @@ export class ClientesEffects {
                 this.store.select(selectRangePutFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit) {
+            if (firstInit || request.IsEmpty()) {
                 return EMPTY; 
             }
 

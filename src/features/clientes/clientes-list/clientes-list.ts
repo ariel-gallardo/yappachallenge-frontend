@@ -6,14 +6,14 @@ import { Client } from '@api/client/models/client.model';
 import { NullableFormControl } from '@api/client/models/common/nullable-form-control.model';
 import { Pagination } from '@api/client/models/common/pagination.model';
 import { ClientesFacade } from '@api/client/redux/clientes/clientes.facade';
-import { FiltersGetRequest } from '@api/client/services/clientes.service';
-import { Subscription } from 'rxjs';
+import { DeleteRequest, FiltersGetRequest } from '@api/client/services/clientes.service';
+import { filter, Subscription } from 'rxjs';
 
 @Component({
   selector: 'clientes-list',
   standalone: false,
   templateUrl: './clientes-list.html',
-  styleUrl: './clientes-list.css',
+  styleUrl: './clientes-list.scss',
 })
 export class ClientesList implements OnInit, OnDestroy, AfterViewInit {
 
@@ -33,7 +33,7 @@ export class ClientesList implements OnInit, OnDestroy, AfterViewInit {
     this.subs.add(this.clientesFacade.DeleteIsLoaded$.subscribe(() => {
       this.clientesFacade.FiltersGet();
     }));
-    this.subs.add(this.clientesFacade.FiltersGetRequest$.subscribe(x => {
+    this.subs.add(this.clientesFacade.FiltersGetRequest$.pipe(filter(x => x !== null && x !== undefined)).subscribe(x => {
       if (!this.form) {
         this.form = this.fb.group(x,{
           updateOn: 'change'
@@ -82,9 +82,9 @@ export class ClientesList implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public eliminar(entityId: number) {
-    this.clientesFacade.DeleteRequestUpdateOne({
-      entityId
-    });
+    const request = new DeleteRequest()
+    request.entityId = entityId;
+    this.clientesFacade.DeleteRequestUpdateOne(request);
   }
 
   onPageChange(e: PageEvent) {

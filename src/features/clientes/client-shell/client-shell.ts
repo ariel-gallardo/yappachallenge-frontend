@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'client-shell',
   standalone: false,
   templateUrl: './client-shell.html',
-  styleUrl: './client-shell.css',
+  styleUrl: './client-shell.scss',
 })
 export class ClientShell {
 

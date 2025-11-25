@@ -21,65 +21,155 @@ import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
 import { ServiceConfiguration } from '../configuration';
 import { BaseService } from './api.base.service';
 
-
-export interface DeleteRequest {
-    entityId?: number;
+export class DeleteRequest {
+    entityId?: number | undefined | null;
+	public IsEmpty(){return !(this.entityId);}
+    constructor(init: Partial<DeleteRequest> = {}){
+        Object.assign(this, init);
+             this.entityId = null;
+            
+    }   
 }
-
-export interface FiltersFirstGetRequest {
-    nombre?: string;
-    apellido?: string;
-    razonSocial?: string;
-    cuit?: string;
-    fechaNacimientoMin?: string;
-    fechaNacimientoMax?: string;
-    telefonoCelular?: string;
-    email?: string;
-    orderBy?: string;
+export class FiltersFirstGetRequest {
+    nombre?: string | undefined | null;
+    apellido?: string | undefined | null;
+    razonSocial?: string | undefined | null;
+    cuit?: string | undefined | null;
+    fechaNacimientoMin?: string | undefined | null;
+    fechaNacimientoMax?: string | undefined | null;
+    telefonoCelular?: string | undefined | null;
+    email?: string | undefined | null;
+    orderBy?: string | undefined | null;
+	public IsEmpty(){return !(this.nombre || this.apellido || this.razonSocial || this.cuit || this.fechaNacimientoMin || this.fechaNacimientoMax || this.telefonoCelular || this.email);}
+    constructor(init: Partial<FiltersFirstGetRequest> = {}){
+        Object.assign(this, init);
+             this.nombre = null;
+            
+             this.apellido = null;
+            
+             this.razonSocial = null;
+            
+             this.cuit = null;
+            
+             this.fechaNacimientoMin = null;
+            
+             this.fechaNacimientoMax = null;
+            
+             this.telefonoCelular = null;
+            
+             this.email = null;
+            
+             this.orderBy = null;
+            
+    }   
 }
-
-export interface FiltersGetRequest {
-    nombre?: string;
-    apellido?: string;
-    razonSocial?: string;
-    cuit?: string;
-    fechaNacimientoMin?: string;
-    fechaNacimientoMax?: string;
-    telefonoCelular?: string;
-    email?: string;
-    orderBy?: string;
-    page?: number;
-    pageSize?: number;
+export class FiltersGetRequest {
+    nombre?: string | undefined | null;
+    apellido?: string | undefined | null;
+    razonSocial?: string | undefined | null;
+    cuit?: string | undefined | null;
+    fechaNacimientoMin?: string | undefined | null;
+    fechaNacimientoMax?: string | undefined | null;
+    telefonoCelular?: string | undefined | null;
+    email?: string | undefined | null;
+    orderBy?: string | undefined | null;
+    page?: number | undefined | null;
+    pageSize?: number | undefined | null;
+	public IsEmpty(){return !(this.nombre || this.apellido || this.razonSocial || this.cuit || this.fechaNacimientoMin || this.fechaNacimientoMax || this.telefonoCelular || this.email);}
+    constructor(init: Partial<FiltersGetRequest> = {}){
+        Object.assign(this, init);
+             this.nombre = null;
+            
+             this.apellido = null;
+            
+             this.razonSocial = null;
+            
+             this.cuit = null;
+            
+             this.fechaNacimientoMin = null;
+            
+             this.fechaNacimientoMax = null;
+            
+             this.telefonoCelular = null;
+            
+             this.email = null;
+            
+             this.orderBy = null;
+            
+             this.page = null;
+            
+             this.pageSize = null;
+            
+    }   
 }
-
-export interface GetRequest {
-    entityId?: number;
+export class GetRequest {
+    entityId?: number | undefined | null;
+	public IsEmpty(){return !(this.entityId);}
+    constructor(init: Partial<GetRequest> = {}){
+        Object.assign(this, init);
+             this.entityId = null;
+            
+    }   
 }
-
-export interface IdsGetRequest {
-    entityIds?: number[];
-    page?: number;
-    pageSize?: number;
+export class IdsGetRequest {
+    entityIds?: number[] | undefined | null;
+    page?: number | undefined | null;
+    pageSize?: number | undefined | null;
+	public IsEmpty(){return !((this.entityIds ? this.entityIds.length > 0 : false));}
+    constructor(init: Partial<IdsGetRequest> = {}){
+        Object.assign(this, init);
+             this.entityIds = [];
+            
+             this.page = null;
+            
+             this.pageSize = null;
+            
+    }   
 }
-
-export interface PostRequest {
-    client?: Client;
+export class PostRequest {
+    client?: Client | undefined | null;
+	public IsEmpty(){return !(this.client?.IsEmpty());}
+    constructor(init: Partial<PostRequest> = {}){
+        Object.assign(this, init);
+            
+             this.client = new Client(); 
+    }   
 }
-
-export interface PutRequest {
-    clientUpdate?: ClientUpdate;
+export class PutRequest {
+    clientUpdate?: ClientUpdate | undefined | null;
+	public IsEmpty(){return !(this.clientUpdate?.IsEmpty());}
+    constructor(init: Partial<PutRequest> = {}){
+        Object.assign(this, init);
+            
+             this.clientUpdate = new ClientUpdate(); 
+    }   
 }
-
-export interface RangeDeleteRequest {
-    requestBody?: number[];
+export class RangeDeleteRequest {
+    requestBody?: number[] | undefined | null;
+	public IsEmpty(){return !((this.requestBody ? this.requestBody.length > 0 : false));}
+    constructor(init: Partial<RangeDeleteRequest> = {}){
+        Object.assign(this, init);
+             this.requestBody = [];
+            
+    }   
 }
-
-export interface RangePostRequest {
-    client2?: Client2[];
+export class RangePostRequest {
+    client2?: Client2[] | undefined | null;
+	public IsEmpty(){return !((this.client2 ? this.client2.length > 0 : false));}
+    constructor(init: Partial<RangePostRequest> = {}){
+        Object.assign(this, init);
+             this.client2 = [];
+            
+    }   
 }
-
-export interface RangePutRequest {
-    clientUpdate2?: ClientUpdate2[];
+export class RangePutRequest {
+    clientUpdate2?: ClientUpdate2[] | undefined | null;
+	public IsEmpty(){return !((this.clientUpdate2 ? this.clientUpdate2.length > 0 : false));}
+    constructor(init: Partial<RangePutRequest> = {}){
+        Object.assign(this, init);
+             this.clientUpdate2 = [];
+            
+    }   
 }
 
 

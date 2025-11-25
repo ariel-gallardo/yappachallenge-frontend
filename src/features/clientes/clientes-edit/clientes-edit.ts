@@ -4,19 +4,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '@api/client/models/client.model';
 import { NullableFormControl } from '@api/client/models/common/nullable-form-control.model';
 import { ClientesFacade } from '@api/client/redux/clientes/clientes.facade';
-import { PutRequest } from '@api/client/services/clientes.service';
+import { GetRequest, PutRequest } from '@api/client/services/clientes.service';
 import { BehaviorSubject, filter, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-clientes-edit',
+  selector: 'clientes-edit',
   standalone: false,
   templateUrl: './clientes-edit.html',
-  styleUrl: './clientes-edit.css',
+  styleUrl: './clientes-edit.scss',
 })
 export class ClientesEdit implements OnInit, OnDestroy, AfterViewInit {
   private subs: Subscription;
   public form?: FormGroup<NullableFormControl<Client>>;
-  public client$: BehaviorSubject<Client> = new BehaviorSubject({});
+  public client$: BehaviorSubject<Client> = new BehaviorSubject(new Client());
 
   constructor(private fb: FormBuilder,private router: Router, private route: ActivatedRoute, private clientesFacade: ClientesFacade) {
     this.subs = this.clientesFacade.Get$.pipe(filter(c => c?.id !== undefined)).subscribe(client => {
@@ -31,7 +31,9 @@ export class ClientesEdit implements OnInit, OnDestroy, AfterViewInit {
       
     }))
     this.subs.add(this.client$.pipe(filter(c => c?.id !== undefined)).subscribe(client => {
-      this.clientesFacade.PutRequestUpdate({clientUpdate: client});
+      const request = new PutRequest();
+      request.clientUpdate = client;
+      this.clientesFacade.PutRequestUpdate(request);
     }))
     this.subs.add(this.clientesFacade.GetRequest$.subscribe(r => this.clientesFacade.Get()));
     this.subs.add(this.clientesFacade.PutIsLoaded$.pipe(filter(p => p)).subscribe(x => this.clientesFacade.Get()))
@@ -47,9 +49,9 @@ export class ClientesEdit implements OnInit, OnDestroy, AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.subs.add(this.route.params.subscribe((o:any) => {
-      this.clientesFacade.GetRequestUpdateOne({
-        entityId: o.id
-      });
+      const request = new GetRequest();
+      request.entityId = o.id;
+      this.clientesFacade.GetRequestUpdateOne(request);
     }));
   }
 
