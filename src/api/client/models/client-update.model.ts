@@ -9,7 +9,6 @@ export class ClientUpdate {
     email?: string | undefined | null;
     id?: number | undefined | null;
 constructor(init: Partial<ClientUpdate> = {}){
-    Object.assign(this, init);
     this.nombre = null;
     this.apellido = null;
     this.razonSocial = null;
@@ -17,8 +16,15 @@ constructor(init: Partial<ClientUpdate> = {}){
     this.fechaNacimiento = null;
     this.telefonoCelular = null;
     this.email = null;
-    this.id = null;
+    this.id = 0;
+    const keys = (Object.keys(init) as (keyof ClientUpdate)[])
+    .filter(k => this[k] !== init[k]);
+    if(keys.length > 0){
+        keys.forEach(k => {
+            //@ts-ignore
+            this[k] = init[k];
+        });
+    }
 }
-	public IsEmpty(){return (this.nombre || this.apellido || this.razonSocial || this.cuit || this.fechaNacimiento || this.telefonoCelular || this.email || this.id);}
 }
 

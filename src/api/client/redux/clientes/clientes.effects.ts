@@ -79,10 +79,10 @@ export class ClientesEffects {
             prevRequest
         })),
         map(({request, skip, prevRequest}) => {
-        if (skip) {
+        if (skip || request == null) {
             return [prevRequest, false] as const;
         }
-
+        if(prevRequest == null) prevRequest = new DeleteRequest();
         const changedKeys = (Object.keys(request) as (keyof DeleteRequest)[])
             .filter(k => prevRequest[k] !== request[k]);
 
@@ -123,9 +123,10 @@ export class ClientesEffects {
                 prevRequest
             })),
             map(({request,skip,prevRequest}) => {
-            if (skip) {
+            if (skip || request == null) {
                 return [null, null] as const;
             }
+            if(prevRequest == null) prevRequest = new DeleteRequest();
             const key = (Object.keys(request) as (keyof DeleteRequest)[])
                 .find(k => prevRequest[k] !== request[k]);
 
@@ -145,17 +146,17 @@ export class ClientesEffects {
                 this.store.select(selectDeleteFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit || request.IsEmpty()) {
+            if (firstInit  || request == null ) {
                 return EMPTY; 
             }
-
+            // @ts-ignore
             return this.api.Delete(request as DeleteRequest, 'response').pipe(
                 map(() => ClientesActions.DeleteSuccess()),
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
                 if (newErr.status === 400 && newErr.error) {
-                    const newErrors = newErr.error as ValidationError[];
-                    //@ts-ignore
+                    const newErrors = newErr.error!.data as ValidationError[][];
+                      this.snackbarService.show(newErr.error!.message, newErr.error!.statusCode);
                     return of(ClientesActions.DeleteSetError({ errors: newErrors }));
                 }
                 return EMPTY;
@@ -179,10 +180,10 @@ export class ClientesEffects {
             prevRequest
         })),
         map(({request, skip, prevRequest}) => {
-        if (skip) {
+        if (skip || request == null) {
             return [prevRequest, false] as const;
         }
-
+        if(prevRequest == null) prevRequest = new FiltersFirstGetRequest();
         const changedKeys = (Object.keys(request) as (keyof FiltersFirstGetRequest)[])
             .filter(k => prevRequest[k] !== request[k]);
 
@@ -223,9 +224,10 @@ export class ClientesEffects {
                 prevRequest
             })),
             map(({request,skip,prevRequest}) => {
-            if (skip) {
+            if (skip || request == null) {
                 return [null, null] as const;
             }
+            if(prevRequest == null) prevRequest = new FiltersFirstGetRequest();
             const key = (Object.keys(request) as (keyof FiltersFirstGetRequest)[])
                 .find(k => prevRequest[k] !== request[k]);
 
@@ -245,10 +247,10 @@ export class ClientesEffects {
                 this.store.select(selectFiltersFirstGetFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit || request.IsEmpty()) {
+            if (firstInit ) {
                 return EMPTY; 
             }
-
+            // @ts-ignore
             return this.api.FiltersFirstGet(request as FiltersFirstGetRequest, 'response').pipe(
                 map(response =>{
                     
@@ -260,8 +262,8 @@ export class ClientesEffects {
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
                 if (newErr.status === 400 && newErr.error) {
-                    const newErrors = newErr.error as ValidationError[];
-                    //@ts-ignore
+                    const newErrors = newErr.error!.data as ValidationError[][];
+                    
                     return of(ClientesActions.FiltersFirstGetSetError({ errors: newErrors }));
                 }
                 else if (newErr.status === 404) {
@@ -302,10 +304,10 @@ export class ClientesEffects {
             prevRequest
         })),
         map(({request, skip, prevRequest}) => {
-        if (skip) {
+        if (skip || request == null) {
             return [prevRequest, false] as const;
         }
-
+        if(prevRequest == null) prevRequest = new FiltersGetRequest();
         const changedKeys = (Object.keys(request) as (keyof FiltersGetRequest)[])
             .filter(k => prevRequest[k] !== request[k]);
 
@@ -346,9 +348,10 @@ export class ClientesEffects {
                 prevRequest
             })),
             map(({request,skip,prevRequest}) => {
-            if (skip) {
+            if (skip || request == null) {
                 return [null, null] as const;
             }
+            if(prevRequest == null) prevRequest = new FiltersGetRequest();
             const key = (Object.keys(request) as (keyof FiltersGetRequest)[])
                 .find(k => prevRequest[k] !== request[k]);
 
@@ -368,10 +371,10 @@ export class ClientesEffects {
                 this.store.select(selectFiltersGetFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit || request.IsEmpty()) {
+            if (firstInit ) {
                 return EMPTY; 
             }
-
+            // @ts-ignore
             return this.api.FiltersGet(request as FiltersGetRequest, 'response').pipe(
                 map(response =>{
                     
@@ -391,8 +394,8 @@ export class ClientesEffects {
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
                 if (newErr.status === 400 && newErr.error) {
-                    const newErrors = newErr.error as ValidationError[];
-                    //@ts-ignore
+                    const newErrors = newErr.error!.data as ValidationError[][];
+                    
                     return of(ClientesActions.FiltersGetSetError({ errors: newErrors }));
                 }
                 else if (newErr.status === 404) {
@@ -419,10 +422,10 @@ export class ClientesEffects {
             prevRequest
         })),
         map(({request, skip, prevRequest}) => {
-        if (skip) {
+        if (skip || request == null) {
             return [prevRequest, false] as const;
         }
-
+        if(prevRequest == null) prevRequest = new GetRequest();
         const changedKeys = (Object.keys(request) as (keyof GetRequest)[])
             .filter(k => prevRequest[k] !== request[k]);
 
@@ -463,9 +466,10 @@ export class ClientesEffects {
                 prevRequest
             })),
             map(({request,skip,prevRequest}) => {
-            if (skip) {
+            if (skip || request == null) {
                 return [null, null] as const;
             }
+            if(prevRequest == null) prevRequest = new GetRequest();
             const key = (Object.keys(request) as (keyof GetRequest)[])
                 .find(k => prevRequest[k] !== request[k]);
 
@@ -485,10 +489,10 @@ export class ClientesEffects {
                 this.store.select(selectGetFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit || request.IsEmpty()) {
+            if (firstInit  || request == null ) {
                 return EMPTY; 
             }
-
+            // @ts-ignore
             return this.api.Get(request as GetRequest, 'response').pipe(
                 map(response =>{
                     
@@ -500,8 +504,8 @@ export class ClientesEffects {
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
                 if (newErr.status === 400 && newErr.error) {
-                    const newErrors = newErr.error as ValidationError[];
-                    //@ts-ignore
+                    const newErrors = newErr.error!.data as ValidationError[][];
+                    
                     return of(ClientesActions.GetSetError({ errors: newErrors }));
                 }
                 else if (newErr.status === 404) {
@@ -542,10 +546,10 @@ export class ClientesEffects {
             prevRequest
         })),
         map(({request, skip, prevRequest}) => {
-        if (skip) {
+        if (skip || request == null) {
             return [prevRequest, false] as const;
         }
-
+        if(prevRequest == null) prevRequest = new IdsGetRequest();
         const changedKeys = (Object.keys(request) as (keyof IdsGetRequest)[])
             .filter(k => prevRequest[k] !== request[k]);
 
@@ -586,9 +590,10 @@ export class ClientesEffects {
                 prevRequest
             })),
             map(({request,skip,prevRequest}) => {
-            if (skip) {
+            if (skip || request == null) {
                 return [null, null] as const;
             }
+            if(prevRequest == null) prevRequest = new IdsGetRequest();
             const key = (Object.keys(request) as (keyof IdsGetRequest)[])
                 .find(k => prevRequest[k] !== request[k]);
 
@@ -608,10 +613,10 @@ export class ClientesEffects {
                 this.store.select(selectIdsGetFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit || request.IsEmpty()) {
+            if (firstInit  || request == null ) {
                 return EMPTY; 
             }
-
+            // @ts-ignore
             return this.api.IdsGet(request as IdsGetRequest, 'response').pipe(
                 map(response =>{
                     
@@ -631,8 +636,8 @@ export class ClientesEffects {
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
                 if (newErr.status === 400 && newErr.error) {
-                    const newErrors = newErr.error as ValidationError[];
-                    //@ts-ignore
+                    const newErrors = newErr.error!.data as ValidationError[][];
+                    
                     return of(ClientesActions.IdsGetSetError({ errors: newErrors }));
                 }
                 else if (newErr.status === 404) {
@@ -659,10 +664,10 @@ export class ClientesEffects {
             prevRequest
         })),
         map(({request, skip, prevRequest}) => {
-        if (skip) {
+        if (skip || request == null) {
             return [prevRequest, false] as const;
         }
-
+        if(prevRequest == null) prevRequest = new PostRequest();
         const changedKeys = (Object.keys(request) as (keyof PostRequest)[])
             .filter(k => prevRequest[k] !== request[k]);
 
@@ -703,9 +708,10 @@ export class ClientesEffects {
                 prevRequest
             })),
             map(({request,skip,prevRequest}) => {
-            if (skip) {
+            if (skip || request == null) {
                 return [null, null] as const;
             }
+            if(prevRequest == null) prevRequest = new PostRequest();
             const key = (Object.keys(request) as (keyof PostRequest)[])
                 .find(k => prevRequest[k] !== request[k]);
 
@@ -725,10 +731,10 @@ export class ClientesEffects {
                 this.store.select(selectPostFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit || request.IsEmpty()) {
+            if (firstInit  || request == null ) {
                 return EMPTY; 
             }
-
+            // @ts-ignore
             return this.api.Post(request as PostRequest, 'response').pipe(
                 map(response =>{
                       this.snackbarService.show(response.body!.message, response.body!.statusCode);
@@ -740,8 +746,8 @@ export class ClientesEffects {
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
                 if (newErr.status === 400 && newErr.error) {
-                    const newErrors = newErr.error as ValidationError[];
-                    //@ts-ignore
+                    const newErrors = newErr.error!.data as ValidationError[][];
+                      this.snackbarService.show(newErr.error!.message, newErr.error!.statusCode);
                     return of(ClientesActions.PostSetError({ errors: newErrors }));
                 }
                 else if (newErr.status === 404) {
@@ -768,10 +774,10 @@ export class ClientesEffects {
             prevRequest
         })),
         map(({request, skip, prevRequest}) => {
-        if (skip) {
+        if (skip || request == null) {
             return [prevRequest, false] as const;
         }
-
+        if(prevRequest == null) prevRequest = new PutRequest();
         const changedKeys = (Object.keys(request) as (keyof PutRequest)[])
             .filter(k => prevRequest[k] !== request[k]);
 
@@ -812,9 +818,10 @@ export class ClientesEffects {
                 prevRequest
             })),
             map(({request,skip,prevRequest}) => {
-            if (skip) {
+            if (skip || request == null) {
                 return [null, null] as const;
             }
+            if(prevRequest == null) prevRequest = new PutRequest();
             const key = (Object.keys(request) as (keyof PutRequest)[])
                 .find(k => prevRequest[k] !== request[k]);
 
@@ -834,10 +841,10 @@ export class ClientesEffects {
                 this.store.select(selectPutFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit || request.IsEmpty()) {
+            if (firstInit  || request == null ) {
                 return EMPTY; 
             }
-
+            // @ts-ignore
             return this.api.Put(request as PutRequest, 'response').pipe(
                 map(response =>{
                       this.snackbarService.show(response.body!.message, response.body!.statusCode);
@@ -849,8 +856,8 @@ export class ClientesEffects {
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
                 if (newErr.status === 400 && newErr.error) {
-                    const newErrors = newErr.error as ValidationError[];
-                    //@ts-ignore
+                    const newErrors = newErr.error!.data as ValidationError[][];
+                      this.snackbarService.show(newErr.error!.message, newErr.error!.statusCode);
                     return of(ClientesActions.PutSetError({ errors: newErrors }));
                 }
                 else if (newErr.status === 404) {
@@ -877,10 +884,10 @@ export class ClientesEffects {
             prevRequest
         })),
         map(({request, skip, prevRequest}) => {
-        if (skip) {
+        if (skip || request == null) {
             return [prevRequest, false] as const;
         }
-
+        if(prevRequest == null) prevRequest = new RangeDeleteRequest();
         const changedKeys = (Object.keys(request) as (keyof RangeDeleteRequest)[])
             .filter(k => prevRequest[k] !== request[k]);
 
@@ -921,9 +928,10 @@ export class ClientesEffects {
                 prevRequest
             })),
             map(({request,skip,prevRequest}) => {
-            if (skip) {
+            if (skip || request == null) {
                 return [null, null] as const;
             }
+            if(prevRequest == null) prevRequest = new RangeDeleteRequest();
             const key = (Object.keys(request) as (keyof RangeDeleteRequest)[])
                 .find(k => prevRequest[k] !== request[k]);
 
@@ -943,17 +951,17 @@ export class ClientesEffects {
                 this.store.select(selectRangeDeleteFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit || request.IsEmpty()) {
+            if (firstInit  || request == null ) {
                 return EMPTY; 
             }
-
+            // @ts-ignore
             return this.api.RangeDelete(request as RangeDeleteRequest, 'response').pipe(
                 map(() => ClientesActions.RangeDeleteSuccess()),
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
                 if (newErr.status === 400 && newErr.error) {
-                    const newErrors = newErr.error as ValidationError[];
-                    //@ts-ignore
+                    const newErrors = newErr.error!.data as ValidationError[][];
+                      this.snackbarService.show(newErr.error!.message, newErr.error!.statusCode);
                     return of(ClientesActions.RangeDeleteSetError({ errors: newErrors }));
                 }
                 return EMPTY;
@@ -991,10 +999,10 @@ export class ClientesEffects {
             prevRequest
         })),
         map(({request, skip, prevRequest}) => {
-        if (skip) {
+        if (skip || request == null) {
             return [prevRequest, false] as const;
         }
-
+        if(prevRequest == null) prevRequest = new RangePostRequest();
         const changedKeys = (Object.keys(request) as (keyof RangePostRequest)[])
             .filter(k => prevRequest[k] !== request[k]);
 
@@ -1035,9 +1043,10 @@ export class ClientesEffects {
                 prevRequest
             })),
             map(({request,skip,prevRequest}) => {
-            if (skip) {
+            if (skip || request == null) {
                 return [null, null] as const;
             }
+            if(prevRequest == null) prevRequest = new RangePostRequest();
             const key = (Object.keys(request) as (keyof RangePostRequest)[])
                 .find(k => prevRequest[k] !== request[k]);
 
@@ -1057,10 +1066,10 @@ export class ClientesEffects {
                 this.store.select(selectRangePostFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit || request.IsEmpty()) {
+            if (firstInit  || request == null ) {
                 return EMPTY; 
             }
-
+            // @ts-ignore
             return this.api.RangePost(request as RangePostRequest, 'response').pipe(
                 map(response =>{
                       this.snackbarService.show(response.body!.message, response.body!.statusCode);
@@ -1080,8 +1089,8 @@ export class ClientesEffects {
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
                 if (newErr.status === 400 && newErr.error) {
-                    const newErrors = newErr.error as ValidationError[];
-                    //@ts-ignore
+                    const newErrors = newErr.error!.data as ValidationError[][];
+                      this.snackbarService.show(newErr.error!.message, newErr.error!.statusCode);
                     return of(ClientesActions.RangePostSetError({ errors: newErrors }));
                 }
                 else if (newErr.status === 404) {
@@ -1122,10 +1131,10 @@ export class ClientesEffects {
             prevRequest
         })),
         map(({request, skip, prevRequest}) => {
-        if (skip) {
+        if (skip || request == null) {
             return [prevRequest, false] as const;
         }
-
+        if(prevRequest == null) prevRequest = new RangePutRequest();
         const changedKeys = (Object.keys(request) as (keyof RangePutRequest)[])
             .filter(k => prevRequest[k] !== request[k]);
 
@@ -1166,9 +1175,10 @@ export class ClientesEffects {
                 prevRequest
             })),
             map(({request,skip,prevRequest}) => {
-            if (skip) {
+            if (skip || request == null) {
                 return [null, null] as const;
             }
+            if(prevRequest == null) prevRequest = new RangePutRequest();
             const key = (Object.keys(request) as (keyof RangePutRequest)[])
                 .find(k => prevRequest[k] !== request[k]);
 
@@ -1188,10 +1198,10 @@ export class ClientesEffects {
                 this.store.select(selectRangePutFirstInit)
             ),
             switchMap(([action, request, firstInit]) => {
-            if (firstInit || request.IsEmpty()) {
+            if (firstInit  || request == null ) {
                 return EMPTY; 
             }
-
+            // @ts-ignore
             return this.api.RangePut(request as RangePutRequest, 'response').pipe(
                 map(response =>{
                       this.snackbarService.show(response.body!.message, response.body!.statusCode);
@@ -1211,8 +1221,8 @@ export class ClientesEffects {
                 catchError((err) => {
                 const newErr = err as HttpErrorResponse;
                 if (newErr.status === 400 && newErr.error) {
-                    const newErrors = newErr.error as ValidationError[];
-                    //@ts-ignore
+                    const newErrors = newErr.error!.data as ValidationError[][];
+                      this.snackbarService.show(newErr.error!.message, newErr.error!.statusCode);
                     return of(ClientesActions.RangePutSetError({ errors: newErrors }));
                 }
                 else if (newErr.status === 404) {

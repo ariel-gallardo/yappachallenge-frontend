@@ -11,9 +11,7 @@ import {Response} from '@api/client/models/common/response.model';
 import {Pagination} from '@api/client/models/common/pagination.model';
 import { BaseResponse } from '@api/client/models/base-response.model';
 import { Client } from '@api/client/models/client.model';
-import { Client2 } from '@api/client/models/client2.model';
 import { ClientUpdate } from '@api/client/models/client-update.model';
-import { ClientUpdate2 } from '@api/client/models/client-update2.model';
 import { ValidationError } from '@api/client/models/validation-error.model';
 import { ClientesReduxModule } from '@api/client/redux/clientes/clientes.module';
 // @ts-ignore
@@ -23,11 +21,17 @@ import { BaseService } from './api.base.service';
 
 export class DeleteRequest {
     entityId?: number | undefined | null;
-	public IsEmpty(){return !(this.entityId);}
     constructor(init: Partial<DeleteRequest> = {}){
-        Object.assign(this, init);
-             this.entityId = null;
+             this.entityId = 0;
             
+        const keys = (Object.keys(init) as (keyof DeleteRequest)[])
+        .filter(k => this[k] !== init[k]);
+        if(keys.length > 0){
+            keys.forEach(k => {
+                //@ts-ignore
+                this[k] = init[k];
+            });
+        }
     }   
 }
 export class FiltersFirstGetRequest {
@@ -40,9 +44,7 @@ export class FiltersFirstGetRequest {
     telefonoCelular?: string | undefined | null;
     email?: string | undefined | null;
     orderBy?: string | undefined | null;
-	public IsEmpty(){return !(this.nombre || this.apellido || this.razonSocial || this.cuit || this.fechaNacimientoMin || this.fechaNacimientoMax || this.telefonoCelular || this.email);}
     constructor(init: Partial<FiltersFirstGetRequest> = {}){
-        Object.assign(this, init);
              this.nombre = null;
             
              this.apellido = null;
@@ -61,6 +63,14 @@ export class FiltersFirstGetRequest {
             
              this.orderBy = null;
             
+        const keys = (Object.keys(init) as (keyof FiltersFirstGetRequest)[])
+        .filter(k => this[k] !== init[k]);
+        if(keys.length > 0){
+            keys.forEach(k => {
+                //@ts-ignore
+                this[k] = init[k];
+            });
+        }
     }   
 }
 export class FiltersGetRequest {
@@ -75,9 +85,7 @@ export class FiltersGetRequest {
     orderBy?: string | undefined | null;
     page?: number | undefined | null;
     pageSize?: number | undefined | null;
-	public IsEmpty(){return !(this.nombre || this.apellido || this.razonSocial || this.cuit || this.fechaNacimientoMin || this.fechaNacimientoMax || this.telefonoCelular || this.email);}
     constructor(init: Partial<FiltersGetRequest> = {}){
-        Object.assign(this, init);
              this.nombre = null;
             
              this.apellido = null;
@@ -100,75 +108,125 @@ export class FiltersGetRequest {
             
              this.pageSize = null;
             
+        const keys = (Object.keys(init) as (keyof FiltersGetRequest)[])
+        .filter(k => this[k] !== init[k]);
+        if(keys.length > 0){
+            keys.forEach(k => {
+                //@ts-ignore
+                this[k] = init[k];
+            });
+        }
     }   
 }
 export class GetRequest {
     entityId?: number | undefined | null;
-	public IsEmpty(){return !(this.entityId);}
     constructor(init: Partial<GetRequest> = {}){
-        Object.assign(this, init);
-             this.entityId = null;
+             this.entityId = 0;
             
+        const keys = (Object.keys(init) as (keyof GetRequest)[])
+        .filter(k => this[k] !== init[k]);
+        if(keys.length > 0){
+            keys.forEach(k => {
+                //@ts-ignore
+                this[k] = init[k];
+            });
+        }
     }   
 }
 export class IdsGetRequest {
     entityIds?: number[] | undefined | null;
     page?: number | undefined | null;
     pageSize?: number | undefined | null;
-	public IsEmpty(){return !((this.entityIds ? this.entityIds.length > 0 : false));}
     constructor(init: Partial<IdsGetRequest> = {}){
-        Object.assign(this, init);
              this.entityIds = [];
             
              this.page = null;
             
              this.pageSize = null;
             
+        const keys = (Object.keys(init) as (keyof IdsGetRequest)[])
+        .filter(k => this[k] !== init[k]);
+        if(keys.length > 0){
+            keys.forEach(k => {
+                //@ts-ignore
+                this[k] = init[k];
+            });
+        }
     }   
 }
 export class PostRequest {
     client?: Client | undefined | null;
-	public IsEmpty(){return !(this.client?.IsEmpty());}
     constructor(init: Partial<PostRequest> = {}){
-        Object.assign(this, init);
             
              this.client = new Client(); 
+        const keys = (Object.keys(init) as (keyof PostRequest)[])
+        .filter(k => this[k] !== init[k]);
+        if(keys.length > 0){
+            keys.forEach(k => {
+                //@ts-ignore
+                this[k] = init[k];
+            });
+        }
     }   
 }
 export class PutRequest {
     clientUpdate?: ClientUpdate | undefined | null;
-	public IsEmpty(){return !(this.clientUpdate?.IsEmpty());}
     constructor(init: Partial<PutRequest> = {}){
-        Object.assign(this, init);
             
              this.clientUpdate = new ClientUpdate(); 
+        const keys = (Object.keys(init) as (keyof PutRequest)[])
+        .filter(k => this[k] !== init[k]);
+        if(keys.length > 0){
+            keys.forEach(k => {
+                //@ts-ignore
+                this[k] = init[k];
+            });
+        }
     }   
 }
 export class RangeDeleteRequest {
     requestBody?: number[] | undefined | null;
-	public IsEmpty(){return !((this.requestBody ? this.requestBody.length > 0 : false));}
     constructor(init: Partial<RangeDeleteRequest> = {}){
-        Object.assign(this, init);
              this.requestBody = [];
             
+        const keys = (Object.keys(init) as (keyof RangeDeleteRequest)[])
+        .filter(k => this[k] !== init[k]);
+        if(keys.length > 0){
+            keys.forEach(k => {
+                //@ts-ignore
+                this[k] = init[k];
+            });
+        }
     }   
 }
 export class RangePostRequest {
-    client2?: Client2[] | undefined | null;
-	public IsEmpty(){return !((this.client2 ? this.client2.length > 0 : false));}
+    client?: Client[] | undefined | null;
     constructor(init: Partial<RangePostRequest> = {}){
-        Object.assign(this, init);
-             this.client2 = [];
+             this.client = [];
             
+        const keys = (Object.keys(init) as (keyof RangePostRequest)[])
+        .filter(k => this[k] !== init[k]);
+        if(keys.length > 0){
+            keys.forEach(k => {
+                //@ts-ignore
+                this[k] = init[k];
+            });
+        }
     }   
 }
 export class RangePutRequest {
-    clientUpdate2?: ClientUpdate2[] | undefined | null;
-	public IsEmpty(){return !((this.clientUpdate2 ? this.clientUpdate2.length > 0 : false));}
+    clientUpdate?: ClientUpdate[] | undefined | null;
     constructor(init: Partial<RangePutRequest> = {}){
-        Object.assign(this, init);
-             this.clientUpdate2 = [];
+             this.clientUpdate = [];
             
+        const keys = (Object.keys(init) as (keyof RangePutRequest)[])
+        .filter(k => this[k] !== init[k]);
+        if(keys.length > 0){
+            keys.forEach(k => {
+                //@ts-ignore
+                this[k] = init[k];
+            });
+        }
     }   
 }
 
@@ -510,11 +568,14 @@ export class ClientesService extends BaseService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public Post(requestParameters?: PostRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<Response<Client>>;
-    public Post(requestParameters?: PostRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpResponse<Response<Client>>>;
-    public Post(requestParameters?: PostRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpEvent<Response<Client>>>;
-    public Post(requestParameters?: PostRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json',}): Observable<any> {
+    public Post(requestParameters: PostRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<Response<Client>>;
+    public Post(requestParameters: PostRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpResponse<Response<Client>>>;
+    public Post(requestParameters: PostRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpEvent<Response<Client>>>;
+    public Post(requestParameters: PostRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json',}): Observable<any> {
         const client = requestParameters?.client;
+        if (client === null || client === undefined) {
+            throw new Error('Required parameter client was null or undefined when calling clientClientesPost.');
+        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -569,11 +630,14 @@ export class ClientesService extends BaseService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public Put(requestParameters?: PutRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<Response<Client>>;
-    public Put(requestParameters?: PutRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpResponse<Response<Client>>>;
-    public Put(requestParameters?: PutRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpEvent<Response<Client>>>;
-    public Put(requestParameters?: PutRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json',}): Observable<any> {
+    public Put(requestParameters: PutRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<Response<Client>>;
+    public Put(requestParameters: PutRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpResponse<Response<Client>>>;
+    public Put(requestParameters: PutRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpEvent<Response<Client>>>;
+    public Put(requestParameters: PutRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json',}): Observable<any> {
         const clientUpdate = requestParameters?.clientUpdate;
+        if (clientUpdate === null || clientUpdate === undefined) {
+            throw new Error('Required parameter clientUpdate was null or undefined when calling clientClientesPut.');
+        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -628,11 +692,14 @@ export class ClientesService extends BaseService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public RangeDelete(requestParameters?: RangeDeleteRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<BaseResponse>;
-    public RangeDelete(requestParameters?: RangeDeleteRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpResponse<BaseResponse>>;
-    public RangeDelete(requestParameters?: RangeDeleteRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpEvent<BaseResponse>>;
-    public RangeDelete(requestParameters?: RangeDeleteRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json',}): Observable<any> {
+    public RangeDelete(requestParameters: RangeDeleteRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<BaseResponse>;
+    public RangeDelete(requestParameters: RangeDeleteRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpResponse<BaseResponse>>;
+    public RangeDelete(requestParameters: RangeDeleteRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpEvent<BaseResponse>>;
+    public RangeDelete(requestParameters: RangeDeleteRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json',}): Observable<any> {
         const requestBody = requestParameters?.requestBody;
+        if (requestBody === null || requestBody === undefined) {
+            throw new Error('Required parameter requestBody was null or undefined when calling clientClientesRangeDelete.');
+        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -687,11 +754,14 @@ export class ClientesService extends BaseService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public RangePost(requestParameters?: RangePostRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<Response<Pagination<Client>>>;
-    public RangePost(requestParameters?: RangePostRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpResponse<Response<Pagination<Client>>>>;
-    public RangePost(requestParameters?: RangePostRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpEvent<Response<Pagination<Client>>>>;
-    public RangePost(requestParameters?: RangePostRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json',}): Observable<any> {
-        const client2 = requestParameters?.client2;
+    public RangePost(requestParameters: RangePostRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<Response<Pagination<Client>>>;
+    public RangePost(requestParameters: RangePostRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpResponse<Response<Pagination<Client>>>>;
+    public RangePost(requestParameters: RangePostRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpEvent<Response<Pagination<Client>>>>;
+    public RangePost(requestParameters: RangePostRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json',}): Observable<any> {
+        const client = requestParameters?.client;
+        if (client === null || client === undefined) {
+            throw new Error('Required parameter client was null or undefined when calling clientClientesRangePost.');
+        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -730,7 +800,7 @@ export class ClientesService extends BaseService {
         const { basePath, withCredentials } = this.configuration;
         return this.httpClient.request<Client[]>('POST', `${basePath}${localVarPath}`,
             {
-                body: client2,
+                body: client,
                 responseType: <any>responseType_,
                 ...(withCredentials ? { withCredentials } : {}),
                 headers: localVarHeaders,
@@ -746,11 +816,14 @@ export class ClientesService extends BaseService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public RangePut(requestParameters?: RangePutRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<Response<Pagination<Client>>>;
-    public RangePut(requestParameters?: RangePutRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpResponse<Response<Pagination<Client>>>>;
-    public RangePut(requestParameters?: RangePutRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpEvent<Response<Pagination<Client>>>>;
-    public RangePut(requestParameters?: RangePutRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json',}): Observable<any> {
-        const clientUpdate2 = requestParameters?.clientUpdate2;
+    public RangePut(requestParameters: RangePutRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<Response<Pagination<Client>>>;
+    public RangePut(requestParameters: RangePutRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpResponse<Response<Pagination<Client>>>>;
+    public RangePut(requestParameters: RangePutRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json',}): Observable<HttpEvent<Response<Pagination<Client>>>>;
+    public RangePut(requestParameters: RangePutRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json',}): Observable<any> {
+        const clientUpdate = requestParameters?.clientUpdate;
+        if (clientUpdate === null || clientUpdate === undefined) {
+            throw new Error('Required parameter clientUpdate was null or undefined when calling clientClientesRangePut.');
+        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -789,7 +862,7 @@ export class ClientesService extends BaseService {
         const { basePath, withCredentials } = this.configuration;
         return this.httpClient.request<Client[]>('PUT', `${basePath}${localVarPath}`,
             {
-                body: clientUpdate2,
+                body: clientUpdate,
                 responseType: <any>responseType_,
                 ...(withCredentials ? { withCredentials } : {}),
                 headers: localVarHeaders,

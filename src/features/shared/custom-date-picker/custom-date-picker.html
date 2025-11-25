@@ -1,3 +1,8 @@
+<mat-error *ngIf="control?.errors?.['data'] as errs">
+  <div class="custom-error" *ngFor="let err of errs">
+    {{ err }}
+  </div>
+</mat-error>
 <mat-form-field appearance="outline" class="w-full">
   <input
     matInput

@@ -1,8 +1,6 @@
 import { BaseResponse } from '@api/client/models/base-response.model';
 import { Client } from '@api/client/models/client.model';
-import { Client2 } from '@api/client/models/client2.model';
 import { ClientUpdate } from '@api/client/models/client-update.model';
-import { ClientUpdate2 } from '@api/client/models/client-update2.model';
 import { ValidationError } from '@api/client/models/validation-error.model';
 import {Response} from '@api/client/models/common/response.model';
 import {StateDetail, StateDetailBase} from '@api/client/models/common/state-detail.model';

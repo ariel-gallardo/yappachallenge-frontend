@@ -54,8 +54,8 @@ export class ClientesList implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
-    this.clientesFacade.FiltersGetDestroy();
-    this.clientesFacade.DeleteDestroy();
+    this.clientesFacade.FiltersGetInit();
+    this.clientesFacade.DeleteInit();
   }
   ngOnInit(): void {
     this.clientesFacade.FiltersGetInit();
