@@ -1,0 +1,69 @@
+<h3 class="text-3xl my-3 text-center uppercase">Crear Cliente</h3>
+
+<form *ngIf="form" class="grid grid-cols-1 gap-4 mx-100" [formGroup]="form" (submit)="submit()">
+
+  <mat-error class="m-0" *ngIf="form?.get('nombre')?.errors?.['data'] as errs">
+    <div *ngFor="let err of errs">
+      {{ err }}
+    </div>
+  </mat-error>
+  <mat-form-field appearance="outline" class="m-0">
+    <input matInput formControlName="nombre" placeholder="Nombre">
+  </mat-form-field>
+
+  <mat-error *ngIf="form?.get('apellido')?.errors?.['data'] as errs">
+    <div *ngFor="let err of errs">
+      {{ err }}
+    </div>
+  </mat-error>
+  <mat-form-field appearance="outline">
+    <input matInput formControlName="apellido" placeholder="Apellido">
+  </mat-form-field>
+
+  <mat-error *ngIf="form?.get('razonSocial')?.errors?.['data'] as errs">
+    <div *ngFor="let err of errs">
+      {{ err }}
+    </div>
+  </mat-error>
+  <mat-form-field appearance="outline">
+    <input matInput formControlName="razonSocial" placeholder="Razón Social">
+  </mat-form-field>
+
+  <mat-error *ngIf="form?.get('cuit')?.errors?.['data'] as errs">
+    <div *ngFor="let err of errs">
+      {{ err }}
+    </div>
+  </mat-error>
+  <mat-form-field appearance="outline">
+    <input matInput formControlName="cuit" mask="00-00000000-0" placeholder="XX-XXXXXXXX-X">
+  </mat-form-field>
+
+
+  <custom-date-picker [control]="fechaNacimiento" format="dd/MM/yyyy"></custom-date-picker>
+
+  <mat-error *ngIf="form?.get('telefonoCelular')?.errors?.['data'] as errs">
+    <div *ngFor="let err of errs">
+      {{ err }}
+    </div>
+  </mat-error>
+  <mat-form-field appearance="outline">
+    <input matInput formControlName="telefonoCelular" placeholder="Teléfono">
+  </mat-form-field>
+
+
+  <mat-error *ngIf="form?.get('email')?.errors?.['data'] as errs">
+    <div *ngFor="let err of errs">
+      {{ err }}
+    </div>
+  </mat-error>
+  <mat-form-field appearance="outline">
+    <input type="email" matInput formControlName="email" placeholder="Email">
+  </mat-form-field>
+
+
+  <button mat-fab extended type="submit">
+    <mat-icon>save</mat-icon>
+    Crear
+  </button>
+
+</form>

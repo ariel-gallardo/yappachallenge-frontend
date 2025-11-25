@@ -14,6 +14,7 @@
     }
   },
   "include": [
+    "node_modules/@angular/material/**/*",
     "src/**/*.ts"
   ],
   "exclude": [
